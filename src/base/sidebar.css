@@ -1,0 +1,39 @@
+.sidebar {
+    flex: 1; 
+    background-color: white;
+  }
+  
+  .sidebarWrapper {
+    color: black;
+  }
+  
+  .sidebarTitle {
+    font-size: 20px;
+    color: grey;
+  }
+  
+  .sidebarList {
+    padding: 5px;
+  }
+  
+  .sidebarListItem {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebarListItem1 {
+    padding: 10px;
+    display: flex;
+    font-size: 20px;
+    color: grey;
+  }
+  
+  .sidebarListItem.active,
+  .sidebarListItem:hover {
+    background-color: whitesmoke;
+  }
+  
+  .sidebarIcon{
+      margin-right: 5px;
+  }
