@@ -8,6 +8,7 @@ export class Header extends Component {
         localStorage.clear();
         window.location.reload();
     }
+
     render() {
         return (
             <header>

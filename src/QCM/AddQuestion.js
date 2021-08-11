@@ -7,7 +7,7 @@ function AddQuestion() {
     const [role, setRole] = useState("Normal")
     return (
         <div className="others ">
-        <section className="contact-section pt-130">
+            <section className="contact-section pt-130">
                 <div className="container">
                     <div className="contact-form-wrapper" >
                         <div id="gromitFormscontact-form" className="gf-form-wrapper pixi-form-contact">
@@ -34,7 +34,7 @@ function AddQuestion() {
                         </div>
                     </div>
                 </div>
-        </section>
+            </section>
         </div>
     );
 }

@@ -2,7 +2,6 @@ import React from "react";
 import Swal from "sweetalert2";
 
 export class AddQuestion2 extends React.Component {
-
     constructor() {
         super()
         this.state = {
@@ -50,7 +49,7 @@ export class AddQuestion2 extends React.Component {
                 title: 'Oops...',
                 text: 'Choisir un Categorie valide!',
             })
-        }else if (this.state.duree === "") {
+        } else if (this.state.duree === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -92,9 +91,11 @@ export class AddQuestion2 extends React.Component {
                                 <span>Question : </span>
                                 <input className="form-control" type="text" name="libellerep" placeholder="Question"
                                     value={this.state.libelle}
-                                    onChange={((data) => { this.setState({ libelle: data.target.value });this.setState(({
-                                        reponse:  { libellerep: data.target.value, vf: "", type: "Normal" }
-                                      })) })}
+                                    onChange={((data) => {
+                                        this.setState({ libelle: data.target.value }); this.setState(({
+                                            reponse: { libellerep: data.target.value, vf: "", type: "Normal" }
+                                        }))
+                                    })}
                                 />
                             </label>
                         </div>
@@ -113,7 +114,7 @@ export class AddQuestion2 extends React.Component {
                         <div className="col-auto gf-field-wrapper gf-field-select gf-field-object " >
                             <label>
                                 <span>Categorie</span>
-                                <select name="categorie" className="" id="dropdown" 
+                                <select name="categorie" className="" id="dropdown"
                                     value={this.state.categorie}
                                     onChange={((data) => { this.setState({ categorie: data.target.value }) })}
                                 >

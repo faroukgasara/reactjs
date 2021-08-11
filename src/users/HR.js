@@ -6,7 +6,6 @@ const emailRegex = RegExp(
 );
 
 export class HR extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -22,7 +21,6 @@ export class HR extends React.Component {
             cmdp: ""
         }
     }
-
 
     async submitHandler() {
         if (this.state.nom === "") {
@@ -50,7 +48,6 @@ export class HR extends React.Component {
                 title: 'Oops...',
                 text: 'Entrez un mail valide!',
             })
-
         } else if (isNaN(this.state.telephone) || this.state.telephone === "" || this.state.telephone.length !== 8) {
             Swal.fire({
                 icon: 'error',
@@ -70,45 +67,33 @@ export class HR extends React.Component {
                 method: 'post',
                 mode: 'cors',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(data)
             }).then(async response => {
-    
                 if (!response.ok) {
-                    
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Mail existe déjà',
                     })
-                    
-                }else{
+                } else {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
                         title: 'Your work has been saved',
                         showConfirmButton: false,
                         timer: 1500
-                      }).then(setTimeout(() => {  window.location.reload(); }, 1600))
-
+                    }).then(setTimeout(() => { window.location.reload(); }, 1500))
                 }
-    
-                
             });
-            
         }
     }
 
-
-
     render() {
         return (
-            
             <div className="container " >
-                
                 <div className="gf-field-wrapper gf-field-string gf-field-fonction  "  >
                     <label>
                         <span>Nom  </span>
@@ -119,7 +104,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="nom"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-fonction  " >
                     <label>
                         <span>Prénom</span>
@@ -130,7 +114,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="fonction"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-entreprise  "  >
                     <label>
                         <span>Mot de passe</span>
@@ -141,7 +124,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="mdp"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-entreprise  "    >
                     <label>
                         <span>Confirm Mot de passe</span>
@@ -152,7 +134,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="mdp"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-email gf-field-email  required "   >
                     <label>
                         <span>Email</span>
@@ -163,7 +144,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="email"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-telephone  "   >
                     <label>
                         <span>Téléphone</span>
@@ -174,7 +154,6 @@ export class HR extends React.Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="telephone"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-telephone "   >
                     <label>
                         <span>Age</span>
@@ -186,7 +165,6 @@ export class HR extends React.Component {
                     <div className="gf-field-validation-message" data-validate-for="telephone"></div>
                 </div>
                 <br></br>
-
                 <button onClick={() => { this.submitHandler() }} data-attach-loading="" type="submit" className="btn btn-primary gf-submit-btn pixi-submit pixi-submit">
                     Ajouter
                 </button>

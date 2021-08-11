@@ -20,14 +20,12 @@ class ListCondidat extends Component {
             .bind(this);
     }
 
-
     submitHandler(email) {
         if (window.confirm('Are You Sure')) {
             fetch("http://localhost:3000/users/" + email, {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
@@ -35,13 +33,10 @@ class ListCondidat extends Component {
         }
     }
 
-
-
     receivedData() {
         axios
             .get(`http://localhost:3000/users`)
             .then(res => {
-
                 const data = res.data;
                 const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
                 const postData = slice.filter((user) => {
@@ -62,28 +57,21 @@ class ListCondidat extends Component {
                             <td>{user.diplome}</td>
                             <td>{user.faculte}</td>
                             <td>
-
                                 <div className="">
                                     <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
-                                    <a title="Update" target="_blank"  href={"/UpdateCondidat/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
+                                    <a title="Update" target="_blank" href={"/UpdateCondidat/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
                                     <a className="fas fa-share" style={{ color: "black" }} href={"/SendQuiz/" + user.email + "/" + user.prenom}></a>
-                                    
                                 </div>
-
                             </td>
                         </tr>
                     ) : (
                         <div>
                         </div>
                     )
-
                 }
-
                 )
-
                 this.setState({
                     pageCount: Math.ceil(data.length / this.state.perPage),
-
                     postData,
                 })
             });
@@ -91,23 +79,22 @@ class ListCondidat extends Component {
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-
         this.setState({
             currentPage: selectedPage,
             offset: offset
         }, () => {
             this.receivedData()
         });
-
     };
 
     componentDidUpdate() {
         this.receivedData()
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.receivedData()
     }
+
     render() {
         return (
             <div className="others"  >
@@ -151,7 +138,6 @@ class ListCondidat extends Component {
                         </table>
                     </div>
                     <div>
-
                     </div>
                 </section>
                 <ReactPaginate
@@ -168,7 +154,6 @@ class ListCondidat extends Component {
                     activeClassName={"active"} />
             </div>
         )
-
     }
 }
 export default ListCondidat;

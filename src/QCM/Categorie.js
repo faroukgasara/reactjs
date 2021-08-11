@@ -3,11 +3,9 @@ import React, { Component } from "react";
 import '../App.css';
 import Swal from "sweetalert2";
 import UpdateCategorieModal from "./UpdateCategorieModal";
-import Pagination from "../Quiz/Pagination";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 class Categorie extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -44,9 +42,8 @@ class Categorie extends Component {
         }
     }
 
-
     async update(id) {
-        if (this.state.libelle != "") {
+        if (this.state.libelle !== "") {
             const requestOptions = {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },

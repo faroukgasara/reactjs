@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../App.css";
 
 const QuestionsModal = ({ handleClose, show, results }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
-
-
     function table() {
-
         if (!results) {
-
         } else {
             return (results.map(res => (
                 <tr key={res._id}>
@@ -18,14 +14,12 @@ const QuestionsModal = ({ handleClose, show, results }) => {
                         {res.vf === 'True' ? <div className="" >
                         <i class="fas fa-check"></i>
                         </div> : <i class="fas fa-times"></i>}
-                        
                     </td>
                     <td>{res.type}</td>
                 </tr>
             )))
         }
     }
-
 
     return (
         <div className={showHideClassName}>

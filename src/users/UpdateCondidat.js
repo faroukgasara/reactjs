@@ -21,11 +21,11 @@ export class UpdateCondidat extends Component {
             user: []
         }
     }
+
     componentDidMount() {
         fetch("http://localhost:3000/users/" + this.props.match.params.id)
             .then((data) => data.json())
             .then((data) => this.setState({ user: data }))
-
     }
 
     async submitHandler() {
@@ -37,42 +37,31 @@ export class UpdateCondidat extends Component {
             })
         }
         else if (this.state.prenom === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un prenom valide!',
             })
-
-
         }
         else if (this.state.faculte === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un faculte valide!',
             })
-
-
         }
         else if (this.state.diplome === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un diplome valide!',
             })
-
-
         } else if (emailRegex.test(this.state.email) === false) {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un mail valide!',
             })
-
         } else if (isNaN(this.state.telephone) || this.state.telephone === "" || this.state.telephone.length !== 8) {
             Swal.fire({
                 icon: 'error',
@@ -92,7 +81,6 @@ export class UpdateCondidat extends Component {
                 method: 'put',
                 mode: 'cors',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
@@ -105,10 +93,8 @@ export class UpdateCondidat extends Component {
                 showConfirmButton: false,
                 timer: 1500
             }).then(setTimeout(() => { window.close(); }, 1600))
-
         }
     }
-
 
     render() {
         return (

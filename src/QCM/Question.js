@@ -1,11 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import Header from "../base/Header";
-import Alert from 'react-popup-alert'
 import '../App.css';
-import { Grid } from "@material-ui/core";
-import { Link, Router } from "react-router-dom";
-import UpdateCategorieModal from "./UpdateCategorieModal";
 import ReactPaginate from "react-paginate";
 import QuestionsModal from "./QuestionsModal";
 

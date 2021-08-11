@@ -19,9 +19,7 @@ class List extends Component {
         this.handlePageClick = this
             .handlePageClick
             .bind(this);
-
     }
-
 
     async submitHandler(email) {
         if (window.confirm('Are You Sure')) {
@@ -29,7 +27,6 @@ class List extends Component {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
@@ -37,13 +34,10 @@ class List extends Component {
         }
     }
 
-
-
     receivedData() {
         axios
             .get(`http://localhost:3000/users`)
             .then(res => {
-
                 const data = res.data;
                 const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
                 const postData = slice.filter((user) => {
@@ -62,50 +56,44 @@ class List extends Component {
                             <td>{user.telephone}</td>
                             <td>{user.age}</td>
                             <td>
-
                                 <div className="">
                                     <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
-                                    <a title="Update" target="_blank"  href={"/UpdateHR/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
+                                    <a title="Update" target="_blank" href={"/UpdateHR/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
                                 </div>
-
                             </td>
                         </tr>
                     ) : (
                         <div>
                         </div>
                     )
-
                 }
-
                 )
-
                 this.setState({
                     pageCount: Math.ceil(data.length / this.state.perPage),
-
                     postData,
                 })
             });
     }
+
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-
         this.setState({
             currentPage: selectedPage,
             offset: offset
         }, () => {
             this.receivedData()
         });
-
     };
 
     componentDidUpdate() {
         this.receivedData()
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.receivedData()
     }
+
     render() {
         return (
             <div className="others"  >
@@ -139,7 +127,6 @@ class List extends Component {
                                     <th>Telephone</th>
                                     <th>Age</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,24 +135,22 @@ class List extends Component {
                         </table>
                     </div>
                     <div>
-                        
                     </div>
                 </section>
                 <ReactPaginate
-                            previousLabel={"Préc"}
-                            nextLabel={"Proch"}
-                            breakLabel={"..."}
-                            breakClassName={"break-me"}
-                            pageCount={this.state.pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={this.handlePageClick}
-                            containerClassName={"pagination"}
-                            subContainerClassName={"pages pagination"}
-                            activeClassName={"active"} />
+                    previousLabel={"Préc"}
+                    nextLabel={"Proch"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"} />
             </div>
         )
-
     }
 }
 export default List;

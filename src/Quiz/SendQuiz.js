@@ -67,7 +67,6 @@ const SendQUIZ = (props) => {
                                 </label>
                                 <div className="gf-field-validation-message" data-validate-for="object"></div>
                             </div>
-
                             <div className="col-auto gf-field-string gf-field-fonction  " >
                                 <label>
                                     <input class="form-control" type="hidden" name="message" value={quizid}
@@ -78,30 +77,22 @@ const SendQUIZ = (props) => {
                             <div className=" col-auto" >
                                 <input className="btn btn-primary gf-submit-btn pixi-submit pixi-submit x" type="submit" value="Envoyer" />
                             </div>
-
-
-
                             <div className="col-auto gf-field-string gf-field-fonction  " >
                                 <label>
                                     <input class="form-control" type="hidden" name="email" value={props.match.params.id}
                                     />
-
                                     <input class="form-control" type="hidden" name="to_name" value={props.match.params.prenom}
                                     />
-
                                     <input class="form-control" type="hidden" name="from_name" value="PIXIMIND"
                                     />
-
                                     <input class="form-control" type="hidden" name="subject" value="Quiz"
                                     />
                                 </label>
                             </div>
                         </div>
-
                         <div>
-                            <DataGrid 
+                            <DataGrid  style={{ height: 400, width: '100%' }}
                                 rows={templates.filter((template) => {
-
                                     if (template.categorie !== null && template.categorie !== undefined && template.categorie !== "") {
                                         if (selectedItem === "All") {
 
@@ -110,27 +101,15 @@ const SendQUIZ = (props) => {
                                         else if (template.categorie.libelle.toLowerCase().includes(selectedItem.toLowerCase())) {
                                             return template;
                                         }
-
                                     }
-
-
-
                                 })}
                                 columns={columns}
-                                pageSize={10}
                                 checkboxSelection
-
-
                                 onSelectionModelChange={itm => setQuizId([...quizid, "http://localhost:3001/QuizManager/" +itm+"/"+ props.match.params.id + "          "])}
-
                                 enableCellSelect={true}
                             />
-
                         </div>
-
-
                     </div>
-
                 </section>
             </form>
         </div>

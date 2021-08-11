@@ -22,13 +22,12 @@ export class UpdateHR extends Component {
             user: []
         }
     }
+
     componentDidMount() {
         fetch("http://localhost:3000/users/" + this.props.match.params.id)
             .then((data) => data.json())
             .then((data) => this.setState({ user: data }))
-
     }
-
 
     async submitHandler() {
         if (this.state.nom === "") {
@@ -44,7 +43,7 @@ export class UpdateHR extends Component {
                 title: 'Oops...',
                 text: 'Entrez un prenom valide!',
             })
-        } else if ((this.state.user.mdp !== this.state.cmdp)|| this.state.mdp === "") {
+        } else if ((this.state.user.mdp !== this.state.cmdp) || this.state.mdp === "") {
             console.log(this.state.user.mdp)
             Swal.fire({
                 icon: 'error',
@@ -73,7 +72,7 @@ export class UpdateHR extends Component {
             })
         } else {
             let data = this.state;
-            fetch("http://localhost:3000/users/"+this.state.user._id, {
+            fetch("http://localhost:3000/users/" + this.state.user._id, {
                 method: 'put',
                 mode: 'cors',
                 headers: {
@@ -92,7 +91,6 @@ export class UpdateHR extends Component {
             }).then(setTimeout(() => { window.close(); }, 1600))
         }
     }
-
 
     render() {
         return (

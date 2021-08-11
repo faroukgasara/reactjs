@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Swal from "sweetalert2";
 
 export class AddCategorie extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -34,7 +33,7 @@ export class AddCategorie extends React.Component {
                         title: 'Oops...',
                         text: 'La catégorie existe déjà',
                     })
-                }else{
+                } else {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -42,7 +41,7 @@ export class AddCategorie extends React.Component {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    this.setState({libelle:""})
+                    this.setState({ libelle: "" })
                 }
             })
         }

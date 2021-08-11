@@ -30,7 +30,6 @@ export class Condidat extends Component {
             })
         }
         else if (this.state.prenom === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -38,7 +37,6 @@ export class Condidat extends Component {
             })
         }
         else if (this.state.faculte === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -46,14 +44,12 @@ export class Condidat extends Component {
             })
         }
         else if (this.state.diplome === "") {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un diplome valide!',
             })
         } else if (emailRegex.test(this.state.email) === false) {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -82,23 +78,22 @@ export class Condidat extends Component {
                 },
                 body: JSON.stringify(this.state)
             }).then(async response => {
-    
                 if (!response.ok) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Mail existe déjà',
                     })
-                }else{
+                } else {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
                         title: 'Your work has been saved',
                         showConfirmButton: false,
                         timer: 1500
-                      }).then(setTimeout(() => {  window.location.reload(); }, 1600))
+                    }).then(setTimeout(() => { window.location.reload(); }, 1500))
                 }
-            });       
+            });
         }
     }
 
@@ -165,7 +160,6 @@ export class Condidat extends Component {
                     </label>
                     <div className="gf-field-validation-message" data-validate-for="telephone"></div>
                 </div>
-
                 <div className="gf-field-wrapper gf-field-string gf-field-telephone  ">
                     <label>
                         <span>Age</span>

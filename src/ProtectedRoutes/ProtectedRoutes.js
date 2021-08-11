@@ -1,26 +1,22 @@
 
-import { useState } from "react";
-import { Redirect,Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
-
-function ProtectedRoutes({isAuth:isAuth ,component:Component,...rest}){
-    return(
+function ProtectedRoutes({ isAuth: isAuth, component: Component, ...rest }) {
+    return (
         <Route
-            {...rest} 
-            render = {(props) => {
-                if (isAuth){
+            {...rest}
+            render={(props) => {
+                if (isAuth) {
                     return <Component />
-                }else {
+                } else {
                     return (
                         <Redirect
-                            to = {{pathname : "/SigIn",State:{from:props.location}}}
+                            to={{ pathname: "/", State: { from: props.location } }}
                         />
                     )
                 }
             }}
         />
-
     )
-
 }
 export default ProtectedRoutes

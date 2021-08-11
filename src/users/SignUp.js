@@ -8,11 +8,10 @@ function SignUp() {
     const [role, setRole] = useState("candidat")
     return (
         <div className="others ">
-        <section className="contact-section pt-130">
+            <section className="contact-section pt-130">
                 <div className="container">
                     <div className="contact-form-wrapper" >
                         <div id="gromitFormscontact-form" className="gf-form-wrapper pixi-form-contact">
-
                             <div className="gf-form-fields-wrapper"  >
                                 <div className="gf-field-wrapper gf-field-select gf-field-object  column" >
                                     <label>
@@ -20,8 +19,6 @@ function SignUp() {
                                         <select name="user" className="" id="dropdown" onChange={(e) => {
                                             const selecredRole = e.target.value;
                                             setRole(selecredRole)
-
-
                                         }} >
                                             <option value="candidat">
                                                 Candidat
@@ -30,8 +27,6 @@ function SignUp() {
                                                 RH
                                             </option>
                                         </select>
-                                        
-
                                     </label>
                                     <div className="gf-field-validation-message" data-validate-for="object"></div>
                                 </div>
@@ -39,14 +34,9 @@ function SignUp() {
                             <div > {role === 'rh' ? <HR /> : <Condidat />}</div>
                         </div>
                     </div>
-
-
                 </div>
-
-        </section>
+            </section>
         </div>
     );
-
-
 }
 export default SignUp;

@@ -79,9 +79,6 @@ function DragAndDrop(props) {
 
     return (
         <Container maxW="unset" className="others">
-            <Heading align="center" color="GrayText">
-                Drag & Drop
-            </Heading>
             <Flex justify="center" justify="space-evenly" height="90vh" align="center" >
                 <Stack width="300px">
                     <Heading fontSize="3xl" color="green.150" textAlign="center">

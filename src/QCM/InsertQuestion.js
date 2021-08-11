@@ -19,7 +19,7 @@ const InsertQuestion = ({ item, playerType, onDropPlayer, index }) => {
   });
 
   return (
-    <ListItem  
+    <ListItem
       p="2"
       borderRadius="md"
       boxShadow="md"

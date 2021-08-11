@@ -123,8 +123,7 @@ const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) =
 
           </div>
           <div className="item3" style={{ backgroundColor: "white" }}>
-            <div style={{ backgroundColor: "whitesmoke", marginLeft: 30, marginRight: 30, textAlign: "left", marginTop: 30 }}>
-              <button className="quizbutton" onClick={onReset, saveresult}>Enregistrer</button></div>
+              <button className="quizbutton2" onClick={onReset, saveresult}>Enregistrer</button>
           </div>
           <div className="item4" style={{ backgroundColor: "#4c5353", textAlign: "center" }}><a className="navbar-brand logo logo-header anim-logo" >
             <img style={{ marginTop: 25 }} src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" className="logo-green" />

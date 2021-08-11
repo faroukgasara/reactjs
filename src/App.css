@@ -7,14 +7,14 @@
   transform: rotate(-90deg);
 }
 
-.item1 { grid-area: header;min-width: 1005px ;min-height: 100px;}
-.item2 { grid-area: menu;min-width: 306px ;min-height: 525px;}
+.item1 { grid-area: header;width: 1005px ;min-height: 100px;}
+.item2 { grid-area: menu;width: 306px ;min-height: 525px;}
 .item3 { grid-area: main;}
 .item4 { grid-area: logo; min-height: 100px;}
 
 .grid-container {
   min-height:840px;
-  min-width: 1924px;
+  width: 1924px;
   display: grid;
   grid-template-areas:
     'logo header header header header header'
@@ -31,7 +31,7 @@
 .grid-c {
   display: grid;
   min-height: 625px;
-  min-width: 1311px;
+  width: 1311px;
   grid-template-areas:
     'logo header header header header header'
     'menu main main main main main';
@@ -447,27 +447,42 @@ input[type=radio] {
 }
 
 .quizbutton{
-    
     border: 0px  #85bb25;
     padding-left: 50px;
     color: white;
     background-color: #85bb25;
-    min-width:200px;
-    min-height: 40px;
+    width:200px;
+    height: 40px;
     margin-left: 30px;
     margin-top: 320px;
 }
 
 .quizbutton1{
-    
   border: 0px  #85bb25;
   padding-left: 70px;
   color: white;
   background-color: #85bb25;
-  min-width:200px;
-  min-height: 40px;
+  width:200px;
+  height: 40px;
   margin-left: 750px;
   margin-top: 30px;
+}
+
+.quizbutton2{
+  border: 0px  #85bb25;
+  padding-left: 60px;
+  color: white;
+  background-color: #85bb25;
+  width:200px;
+  height: 40px;
+  margin-left: 750px;
+  margin-top: 30px;
+}
+
+.quizbutton2:hover{
+  color: #85bb25;
+  background-color: white;
+
 }
 
 .quizbutton1:hover{
