@@ -37,7 +37,7 @@ export class AddCategorie extends React.Component {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your work has been saved',
+                        title: 'Votre travail a été enregistré',
                         showConfirmButton: false,
                         timer: 1500
                     })

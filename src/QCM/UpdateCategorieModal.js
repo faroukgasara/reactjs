@@ -3,7 +3,7 @@ import "../App.css";
 
 const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-    const [updatecat,setUpdateCat] = useState({libelle: "NestJs"})
+    const [updatecat,setUpdateCat] = useState({libelle: ""})
 
     function update() {
         const requestOptions = {
@@ -12,9 +12,8 @@ const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
             body: JSON.stringify(updatecat)
         };
         fetch("http://localhost:3000/categories/" + data, requestOptions)
-            .then(response => response.json());
-        window.location.reload();
-
+            .then(handleClose());
+            
     }
 
     const changeHandler = e => {

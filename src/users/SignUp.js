@@ -15,7 +15,8 @@ function SignUp() {
                             <div className="gf-form-fields-wrapper"  >
                                 <div className="gf-field-wrapper gf-field-select gf-field-object  column" >
                                     <label>
-                                        <span>Role</span>
+                                        <span>Rôle
+                                        </span>
                                         <select name="user" className="" id="dropdown" onChange={(e) => {
                                             const selecredRole = e.target.value;
                                             setRole(selecredRole)

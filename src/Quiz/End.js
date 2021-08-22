@@ -81,12 +81,12 @@ const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) =
 
             <div className="container">
 
-              <p style={{ width: 105, marginTop: 45, marginBottom: 30 }}  >
+              <p style={{ width: 105, marginTop: 45, marginBottom: 50 }}  >
                 {tem}
               </p>
 
               <p style={{ width: 30, fontSize: 15 }}  >
-                Temp Total
+                Temp 
               </p>
 
               <CountdownCircleTimer
@@ -102,7 +102,7 @@ const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) =
                 {({ remainingTime }) => renderTime(remainingTime)}
               </CountdownCircleTimer>
 
-              <p style={{ width: 30, fontSize: 15 }}  >
+              <p style={{ width: 30, fontSize: 15,marginTop: 45 }}  >
                 Question
               </p>
               <div className="row "  >
@@ -123,7 +123,7 @@ const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) =
 
           </div>
           <div className="item3" style={{ backgroundColor: "white" }}>
-              <button className="quizbutton2" onClick={onReset, saveresult}>Enregistrer</button>
+              <button className="quizbutton2" onClick={onReset, saveresult}>Terminer</button>
           </div>
           <div className="item4" style={{ backgroundColor: "#4c5353", textAlign: "center" }}><a className="navbar-brand logo logo-header anim-logo" >
             <img style={{ marginTop: 25 }} src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" className="logo-green" />

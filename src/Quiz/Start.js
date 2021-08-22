@@ -51,7 +51,7 @@ const Start = ({ onQuizStart, tem }) => {
                 {({ remainingTime }) => renderTime(remainingTime)}
               </CountdownCircleTimer>
 
-              <p style={{ width: 30, fontSize: 15 }}  >
+              <p style={{ width: 30, fontSize: 15, marginTop: 60 }}  >
                 Question
               </p>
               <div className="row "  >

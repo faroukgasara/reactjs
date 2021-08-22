@@ -2,7 +2,7 @@ import "./sidebar.css";
 import SignUp from '../users/SignUp';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import List from '../users/List';
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Categorie from '../QCM/Categorie';
 import AddCategorie from '../QCM/AddCategorie';
 import AddQuestion from '../QCM/AddQuestion';
@@ -10,6 +10,7 @@ import UpdateQuestion from '../QCM/UpdateQuestion';
 import AddTemplate from '../QCM/AddTemplate';
 import Question from '../QCM/Question';
 import DragAndDrop from '../QCM/DragAndDrop';
+import TemplateManager from '../QCM/TemplateManager';
 import ListCondidat from '../users/ListCondidat';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
@@ -20,15 +21,20 @@ import {
   TrendingUp,
   ListAlt,
   AddBox,
+  PortableWifiOffOutlined,
+  Face,
+  Person,
 } from "@material-ui/icons";
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 import SendQUIZ from "../Quiz/SendQuiz";
 import resultats from "../Quiz/resultats";
 import UpdateCondidat from "../users/UpdateCondidat";
 import UpdateHR from "../users/UpdateHR";
+import { Avatar } from "@material-ui/core";
+import Profile from "./Profile";
 
 function Sidebar() {
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const [isAuth, SetIsAuth] = useState(true);
 
   const submitHandler = () => {
@@ -52,24 +58,11 @@ function Sidebar() {
               <div className="sidebar">
                 <div className="sidebarWrapper">
                   <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">Dashboard</h3>
+                    <img className="sidebarTitle" src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" />
                     <ul className="sidebarList">
-                      <li className="sidebarListItem active">
-                        List
+                      <li className="sidebarTitle">
+                        Dashbord
                       </li>
-                      <li className="sidebarListItem">
-                        <Timeline className="sidebarIcon" />
-                        Analytics
-                      </li>
-                      <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon" />
-                        Sales
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">Quick Menu</h3>
-                    <ul className="sidebarList">
                       <li className="sidebarListItem1">
                         Users
                       </li>
@@ -138,9 +131,11 @@ function Sidebar() {
                 <Route path="/SendQuiz/:id/:prenom" component={SendQUIZ} isAuth={isAuth} />
                 <ProtectedRoutes path="/AddTemplate" component={AddTemplate} isAuth={isAuth} />
                 <Route path="/DragAndDrop/:id" component={DragAndDrop} />
+                <Route path="/TemplateManager/:id" component={TemplateManager} />
                 <Route path="/UpdateCondidat/:id" component={UpdateCondidat} />
                 <Route path="/UpdateHR/:id" component={UpdateHR} />
                 <ProtectedRoutes path="/Templates" component={Templates} isAuth={isAuth} />
+                <ProtectedRoutes path="/Profile" component={Profile} isAuth={isAuth} />
                 <ProtectedRoutes path="/reultats" component={resultats} isAuth={isAuth} />
               </Switch>
             </Router>

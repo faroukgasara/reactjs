@@ -88,7 +88,7 @@ export class Condidat extends Component {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your work has been saved',
+                        title: 'Votre travail a été enregistré',
                         showConfirmButton: false,
                         timer: 1500
                     }).then(setTimeout(() => { window.location.reload(); }, 1500))
@@ -122,8 +122,8 @@ export class Condidat extends Component {
                 </div>
                 <div className="gf-field-wrapper gf-field-string gf-field-fonction  ">
                     <label>
-                        <span>Diplome</span>
-                        <input type="text" name="diplome" className="form-control" placeholder="Diplome"
+                        <span>Diplôme</span>
+                        <input type="text" name="diplome" className="form-control" placeholder="Diplôme"
                             value={this.state.diplome}
                             onChange={((data) => { this.setState({ diplome: data.target.value }) })}
                         />
@@ -132,8 +132,8 @@ export class Condidat extends Component {
                 </div>
                 <div className="gf-field-wrapper gf-field-string gf-field-entreprise  ">
                     <label>
-                        <span>Faculte</span>
-                        <input type="text" name="faculte" className="form-control" placeholder="Faculte"
+                        <span>Faculté</span>
+                        <input type="text" name="faculte" className="form-control" placeholder="Faculté"
                             value={this.state.faculte}
                             onChange={((data) => { this.setState({ faculte: data.target.value }) })}
                         />

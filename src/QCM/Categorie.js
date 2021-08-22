@@ -29,9 +29,17 @@ class Categorie extends Component {
             .bind(this);
     }
 
-    async submitHandler(id) {
-        if (window.confirm('Are You Sure')) {
-            fetch("http://localhost:3000/categories/" + id, {
+    submitHandler(id) {
+        Swal.fire({
+            title: 'Es-tu sûr?',
+            text: 'Vous ne pouvez pas récupérer ça!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, supprimez-le!',
+            cancelButtonText: 'Non, garde-le'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("http://localhost:3000/categories/" + id, {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
@@ -39,7 +47,19 @@ class Categorie extends Component {
                     'Accept': 'application/json'
                 },
             })
-        }
+              Swal.fire(
+                'Supprimé!',
+                'Suppression Effectuer.',
+                'success'
+              )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'Annulé',
+                'Suppression Annuler',
+                'error'
+              )
+            }
+          })
     }
 
     async update(id) {
@@ -131,19 +151,21 @@ class Categorie extends Component {
             <div className="others">
                 <section className="contact-section pt-130">
                     <div className="container">
-                        <div className="row">
+                        <div className="topleft">
                             <div className="col-md-12">
-
-                                <div className="section-title text-center animate__animated animate__fadeInDown">
+                            <div className="section-title text-center animate__animated animate__fadeInDown">
                                     <p>List des Categories</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-auto gf-field-wrapper gf-field-string gf-field-fonction  "   >
+                </section>
+
+                <section className="contact-section pt-130">
+                    <div className="col-auto gf-field-string gf-field-fonction  "   >
                         <label>
-                            <span>Recherche : </span>
-                            <input className="form-control" type="text" name="search" placeholder="Recherche"
+                            <span>Recherche : </span><br></br>
+                            <input class="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />
@@ -157,7 +179,7 @@ class Categorie extends Component {
                             <thead>
                                 <tr>
                                     <th>Libelle</th>
-                                    <th>Action</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,7 +190,7 @@ class Categorie extends Component {
                 </section>
                 <ReactPaginate
                     previousLabel={"Préc"}
-                    nextLabel={"Proch"}
+                    nextLabel={"Suivant"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
                     pageCount={this.state.pageCount}

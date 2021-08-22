@@ -4,6 +4,21 @@ import "../App.css";
 const Modal = ({ handleClose, show, results }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+
+    useEffect(() => {
+      let correct = 0;
+      if(!results){
+      }else{
+        results.forEach((result) => {
+            if(result.a ===  result.q) {
+              correct++;
+            }
+          });
+          setCorrectAnswers(correct);
+      }
+    });
+    
     return (
         <div className={showHideClassName}>
             <div className="modalBackground1">
@@ -16,6 +31,7 @@ const Modal = ({ handleClose, show, results }) => {
                     <br></br>
                     <div className="title">
                         <strong>Resultat !</strong>
+                        <p > {correctAnswers }<strong >/{results.length}</strong></p>
                     </div>
                     <br></br>
 
@@ -27,15 +43,12 @@ const Modal = ({ handleClose, show, results }) => {
                                 <div key={i} className="col-md-12">
                                     <div className="col-auto">
                                         <p>{i+1} : Type : {result.t}</p>
-                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}>Bonne réponse: {result.q}</p>
-                                    </div>
+                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <div>Question: {result.q}</div> : <p>Bonne réponse: {result.q}</p> }</p>
+                                    </div>         
                                     <div className="col-auto">
-                                        <p className={(result.a === result.q) ? 'greenresult' : 'redresult'}>{(result.a !== result.q) && (result.t === "Normal") ? <div>Question: {result.a}</div> : <div>La réponse: {result.a}</div> }</p>
-                                            
+                                        <p className={(result.a === result.q) ? 'greenresult' : 'redresult'}>{(result.a !== result.q) && (result.t === "Normal") ? <div>La réponse: {result.a}</div> : <div>La réponse: {result.a}</div> }</p>
                                             
                                     </div>
-                                    
-                                
                                 </div>
                             )
                             )}

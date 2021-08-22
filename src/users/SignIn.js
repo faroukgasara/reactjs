@@ -48,6 +48,7 @@ export const SignIn = () => {
                     })
                 }
             }).then(data => {
+                localStorage.setItem('user', JSON.stringify(data.user.user));
                 localStorage.setItem("token", data.access_token)
             }).catch(error => {
                 console.error(error)
@@ -56,7 +57,7 @@ export const SignIn = () => {
     }
 
     return (
-        <div className="contact-form-wrapper" >
+        <div className="" >
             <div className="gf-form-fields-wrapper"  >
                 <div>{
                     (token && token !== "" && token !== undefined) ? <Sidebar /> :
@@ -82,7 +83,7 @@ export const SignIn = () => {
                                 <br></br>
                                 <br></br>
                                 <button onClick={submitHandler} className="btn btn-white btn-lg btn-block">
-                                    Log in
+                                    Se connecter
                                 </button>
                             </div>
                         </div>

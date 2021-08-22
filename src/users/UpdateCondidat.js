@@ -86,13 +86,24 @@ export class UpdateCondidat extends Component {
                 },
                 body: JSON.stringify(data)
             })
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Votre travail a été enregistré',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(setTimeout(() => { window.close(); }, 1600))
+            .then(async response => {
+                if (!response.ok) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Mail existe déjà',
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Modification Effectuée',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(setTimeout(() => { window.close(); }, 1600))
+                }
+            });
+            
         }
     }
 

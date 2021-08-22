@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import '../App.css';
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import Swal from "sweetalert2";
+
 class ListCondidat extends Component {
     constructor(props) {
         super(props)
@@ -21,17 +23,39 @@ class ListCondidat extends Component {
     }
 
     submitHandler(email) {
-        if (window.confirm('Are You Sure')) {
-            fetch("http://localhost:3000/users/" + email, {
-                method: 'DELETE',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-            })
-        }
+        Swal.fire({
+            title: 'Es-tu sûr?',
+            text: 'Vous ne pouvez pas récupérer ça!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, supprimez-le!',
+            cancelButtonText: 'Non, garde-le'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("http://localhost:3000/users/" + email, {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                Swal.fire(
+                    'Supprimé!',
+                    'Suppression Effectuer.',
+                    'success'
+                )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Annulé',
+                    'Suppression Annuler',
+                    'error'
+                )
+            }
+        })
     }
+
+
 
     receivedData() {
         axios
@@ -42,7 +66,7 @@ class ListCondidat extends Component {
                 const postData = slice.filter((user) => {
                     if (this.state.search === '') {
                         return user;
-                    } else if (user.prenom.toLowerCase().includes(this.state.search.toLowerCase())) {
+                    } else if (user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
                         return user;
                     }
                 }).map(user => {
@@ -99,19 +123,22 @@ class ListCondidat extends Component {
         return (
             <div className="others"  >
                 <section className="contact-section pt-130">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
+                    <div className="container">
+                        <div className="topleft">
+                            <div class="col-md-12 ">
                                 <div class="section-title text-center animate__animated animate__fadeInDown" >
                                     <p>List des Candidats</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-auto gf-field-wrapper gf-field-string gf-field-fonction  "   >
+                </section>
+                <section className="contact-section pt-130">
+
+                    <div className="col-auto gf-field-string gf-field-fonction  "   >
                         <label>
-                            <span>Recherche : </span>
-                            <input class="form-control" type="text" name="search" placeholder="Recherche"
+                            <span>Recherche : </span><br></br>
+                            <input class="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />
@@ -121,15 +148,15 @@ class ListCondidat extends Component {
                         <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table" >
                             <thead>
                                 <tr>
-                                    <th>Role</th>
+                                    <th>Rôle</th>
                                     <th>Nom</th>
                                     <th>Prenom</th>
                                     <th>Email</th>
                                     <th>Telephone</th>
                                     <th>Age</th>
-                                    <th>Diplome</th>
-                                    <th>Faclute</th>
-                                    <th>Action</th>
+                                    <th>Diplôme</th>
+                                    <th>Faculté</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,7 +169,7 @@ class ListCondidat extends Component {
                 </section>
                 <ReactPaginate
                     previousLabel={"Préc"}
-                    nextLabel={"Proch"}
+                    nextLabel={"Suivant"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
                     pageCount={this.state.pageCount}

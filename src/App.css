@@ -1,3 +1,35 @@
+.topleft{
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.top{
+  position: absolute;
+  top: 10px;
+  right: 120px;
+}
+
+.topright {
+ margin-left: 480px;
+
+}
+
+.add{
+  border-radius: 15px 50px 30px;
+  border: 2px solid #85bb25;
+  padding: 20px; 
+  width: 400px;
+  height: 15px; 
+  margin-top: 10px;   
+  margin-bottom: 20px;  
+}
+
+.search { 
+  position: relative; 
+  margin: 0 auto ;
+  text-align: center;
+}
 
 .tourne {
   -webkit-transform:rotate(-90deg);
@@ -9,7 +41,7 @@
 
 .item1 { grid-area: header;width: 1005px ;min-height: 100px;}
 .item2 { grid-area: menu;width: 306px ;min-height: 525px;}
-.item3 { grid-area: main;}
+.item3 { grid-area: main;position: relative;}
 .item4 { grid-area: logo; min-height: 100px;}
 
 .grid-container {
@@ -51,13 +83,14 @@
   width: 100%;
   min-height: 60vh;
   display: flex;
-  margin-top: 70px;
-  margin-bottom: 130px;
+  margin-top: 100px;
+  margin-bottom: 172px;
 }
 
 .loginContainer1 {
+  position: relative;
+  left: 30%;
   margin-top: auto;
-  margin-left: 550px;
   min-height: 500px;
   display: flex;
   flex-direction: column;
@@ -65,7 +98,11 @@
   box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
 }
 
+
+
 .login .loginContainer {
+  position: relative;
+  left: 30%;
   padding: 50px;
   margin-top: auto;
   width: 100%;
@@ -115,13 +152,13 @@
 
 
 .redresult {
-  background: #DC143C	;
+  background: #ffa366	;
   margin: 10px;
   padding: 10px;
 }
 
 .blueresult {
-  background: #0066ff	;
+  background: #e6e6e6	;
   margin: 10px;
   padding: 10px;
 }
@@ -163,26 +200,29 @@
 
 .scroller {
   margin: 0 auto;
-  min-width: 650px;
-  min-height: 85000px;
+  width: 1450px;
+  height: 850px;
   overflow: auto;
 }
 
 .modalBackground1 {
-  min-width: 100vw;
+  width: 100vw;
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 .modalContainer1 {
-  min-width: 800px;
+  width: 1500px;
   border-radius: 12px;
   background-color: white;
   display: flex;
   flex-direction: column;
   padding: 25px;
+  height: 800px;
+  
 }
 
 .modalContainer2 {
@@ -300,6 +340,7 @@
   margin-top: 10px;
 }
 .others{
+  position: relative;
   flex:4;
   
 }
@@ -464,8 +505,9 @@ input[type=radio] {
   background-color: #85bb25;
   width:200px;
   height: 40px;
-  margin-left: 750px;
-  margin-top: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 
 .quizbutton2{
@@ -475,8 +517,8 @@ input[type=radio] {
   background-color: #85bb25;
   width:200px;
   height: 40px;
-  margin-left: 750px;
-  margin-top: 30px;
+  margin-left: 770px;
+  margin-top: 450px;
 }
 
 .quizbutton2:hover{

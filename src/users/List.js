@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import '../App.css';
 import ReactPaginate from "react-paginate";
+import Swal from "sweetalert2";
 
 class List extends Component {
     constructor(props) {
@@ -21,9 +22,17 @@ class List extends Component {
             .bind(this);
     }
 
-    async submitHandler(email) {
-        if (window.confirm('Are You Sure')) {
-            fetch("http://localhost:3000/users/" + email, {
+    submitHandler(email) {
+        Swal.fire({
+            title: 'Es-tu sûr?',
+            text: 'Vous ne pouvez pas récupérer ça!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, supprimez-le!',
+            cancelButtonText: 'Non, garde-le'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("http://localhost:3000/users/" + email, {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
@@ -31,7 +40,19 @@ class List extends Component {
                     'Accept': 'application/json'
                 },
             })
-        }
+              Swal.fire(
+                'Supprimé!',
+                'Suppression Effectuer.',
+                'success'
+              )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'Annulé',
+                'Suppression Annuler',
+                'error'
+              )
+            }
+          })
     }
 
     receivedData() {
@@ -43,7 +64,7 @@ class List extends Component {
                 const postData = slice.filter((user) => {
                     if (this.state.search === "") {
                         return user;
-                    } else if (user.prenom.toLowerCase().includes(this.state.search.toLowerCase())) {
+                    } else if (user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
                         return user;
                     }
                 }).map(user => {
@@ -88,6 +109,7 @@ class List extends Component {
 
     componentDidUpdate() {
         this.receivedData()
+        
     }
 
     componentDidMount() {
@@ -98,19 +120,21 @@ class List extends Component {
         return (
             <div className="others"  >
                 <section className="contact-section pt-130">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
+                    <div className="container">
+                        <div className="topleft">
+                            <div class="col-md-12 ">
                                 <div class="section-title text-center animate__animated animate__fadeInDown" >
                                     <p>List des RH</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-auto gf-field-wrapper gf-field-string gf-field-fonction  "   >
+                </section>
+                <section className="contact-section pt-130">
+                    <div className="col-auto  gf-field-string gf-field-fonction  "   >
                         <label>
-                            <span>Recherche : </span>
-                            <input class="form-control" type="text" name="search" placeholder="Recherche"
+                            <span>Recherche : </span><br></br>
+                            <input class="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />
@@ -120,13 +144,13 @@ class List extends Component {
                         <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table" >
                             <thead>
                                 <tr>
-                                    <th>Role</th>
+                                    <th>Rôle</th>
                                     <th>Nom</th>
                                     <th>Prenom</th>
                                     <th>Email</th>
                                     <th>Telephone</th>
                                     <th>Age</th>
-                                    <th>Action</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,7 +163,7 @@ class List extends Component {
                 </section>
                 <ReactPaginate
                     previousLabel={"Préc"}
-                    nextLabel={"Proch"}
+                    nextLabel={"Suivant"}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
                     pageCount={this.state.pageCount}

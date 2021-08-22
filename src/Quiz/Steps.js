@@ -106,8 +106,8 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                                 duration={counter}
                                 colors={[
                                     ['#004777', 0.33],
-                                    ['#F7B801', 0.33],
-                                    ['#A30000', 0.33],
+                                    ['#004777', 0.33],
+                                    ['#004777', 0.33],
 
                                 ]}
                                 onComplete={() => { nextClickHandler() }}
@@ -135,7 +135,7 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                     </div>
                     <div className='item3' style={{ backgroundColor: "white" }}>
                         <div className="container" ref={radiosWrapper}>
-                        <button className="quizbutton1" onClick={nextClickHandler}>Suivant</button>
+                        
 
                             {data.reponse.map((choice, i) => {
                                 {
@@ -161,6 +161,7 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                                 }
                             })}
                         </div>
+                        <button className="quizbutton1" onClick={nextClickHandler}>Suivant</button>
                         {error && <div className="wrong">{error}</div>}
                        
                     </div>

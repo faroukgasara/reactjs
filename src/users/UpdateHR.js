@@ -81,14 +81,24 @@ export class UpdateHR extends Component {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(data)
+            }).then(async response => {
+                if (!response.ok) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Mail existe déjà',
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Modification Effectuée',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(setTimeout(() => { window.close(); }, 1600))
+                }
             });
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(setTimeout(() => { window.close(); }, 1600))
+            
         }
     }
 
