@@ -1,3 +1,22 @@
+.error {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%)
+}
+
+.h {
+  font-size: calc(17vw + 40px);
+}
+
+.p1 {
+  font-size: 20px;
+  font-weight: bold;
+  color:blanchedalmond
+}
+
+
 .topleft{
   position: absolute;
   top: 8px;

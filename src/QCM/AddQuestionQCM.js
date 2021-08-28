@@ -112,13 +112,13 @@ class AddQuestionQCM extends React.Component {
             <div className="col-auto gf-field-wrapper gf-field-string gf-field-fonction"   >
               <label>
                 <span>Reponse : </span>
-                <input className="form-control" type="text" placeholder="Reponse" name="libellerep" value={element.libellerep} onChange={e => this.handleChange(index, e)} />
+                <input required className="form-control" type="text" placeholder="Reponse" name="libellerep" value={element.libellerep} onChange={e => this.handleChange(index, e)} />
               </label>
             </div>
             <div className="col-auto " >
               <label>
                 <span>V/F : </span>
-                <input type="radio" value="True" name="vf" onChange={e => this.handleChange(index, e)} /> Vrai
+                <input required type="radio" value="True" name="vf" onChange={e => this.handleChange(index, e)} /> Vrai
               </label>
             </div>
             <div className=" col-auto " >
@@ -146,7 +146,7 @@ class AddQuestionQCM extends React.Component {
         <br></br>
         <div className="col-auto gf-field-wrapper gf-field-string gf-field-object" >
           <label>
-            <span>Categorie</span>
+            <span>Catégories</span>
             <select name="categorie" className="" id="dropdown"
               value={this.state.categorie}
               onChange={((data) => { this.setState({ categorie: data.target.value }) })}

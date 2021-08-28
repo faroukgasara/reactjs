@@ -48,16 +48,17 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
     const nextClickHandler = () => {
         setCounter(0)
 
+       let qs = data.libelle ;
         data.reponse.map((choice, i) => {
             if (choice.type === "QCM") {
 
                 if (choice.vf != "") {
-                    onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: selected, t: "QCM" }]);
+                    onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: selected, t: "QCM" ,qs:qs}]);
                 }
             }
             if (choice.type === "Normal") {
                 setSelected('zef');
-                onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: rep, t: "Normal" }]);
+                onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: rep, t: "Normal",qs:qs }]);
             }
         })
 
@@ -127,7 +128,7 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                             </div>
 
                             <SkillBar skills={skills}
-                                height={5}
+                                height={10}
                                 colors={colors}
                             />
 

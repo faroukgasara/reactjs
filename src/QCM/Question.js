@@ -98,7 +98,7 @@ class List extends Component {
 
     submitHandler(id) {
         Swal.fire({
-            title: 'Es-tu sûr?',
+            title: 'Vous êtes sûr?',
             text: 'Vous ne pouvez pas récupérer ça!',
             icon: 'warning',
             showCancelButton: true,
@@ -130,7 +130,6 @@ class List extends Component {
     }
 
     render() {
-
         return (
             <div className="others">
                 <QuestionsModal show={this.state.show} handleClose={this.hideModal} results={this.state.reponse} >
@@ -160,10 +159,10 @@ class List extends Component {
                         <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                             <thead>
                                 <tr>
-                                    <th>Libelle</th>
-                                    <th>Categorie</th>
+                                    <th>Questions</th>
+                                    <th>Catégories</th>
                                     <th>Durée</th>
-                                    <th>Reponse</th>
+                                    <th>Réponse</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

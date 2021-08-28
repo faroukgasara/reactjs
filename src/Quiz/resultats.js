@@ -76,7 +76,7 @@ class resultats extends Component {
                 const postData = slice.filter((user) => {
                     if (this.state.search === '') {
                         return user;
-                    } else if (user.user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
+                    } else if (user.template.libelle.toLowerCase().includes(this.state.search.toLowerCase()) || user.user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
                         return user;
                     }
                 }).map(res => {
@@ -216,23 +216,26 @@ class resultats extends Component {
                     <table id="table" class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                         <thead>
                             <tr>
-                                <th>Question/Bonne Reponse</th>
-                                <th>Les Réponse</th>
+                                <th>Question</th>
+                                <th>Bonne Réponse</th>
+                                <th>Réponse</th>
                                 <th>Résultat</th>
                             </tr>
                         </thead>
                         <tbody>
                             {!this.state.res ? <div> Error</div> :
                                 this.state.res.map((result, i) =>
-                                (
-                                    <tr >
-                                        <td> {result.t === "Normal" ? <div>Question: {result.q}</div> : <p>Bonne réponse: {result.q}</p>}</td>
-                                        <td>{(result.a !== result.q) && (result.t === "Normal") ? <div>La réponse: {result.a}</div> : <div>La réponse: {result.a}</div>}</td>
-                                        <td>{result.a !== result.q  ? 
-                                        <div>{result.t === "Normal" ? <div>Redaction</div> : <div>False</div> }</div> 
-                                        : <div>True</div>}</td>
-                                    </tr>
-                                )
+                                {
+                                    {return(result.t === "QCM" ? <tr >
+                                    <td> {result.t === "QCM" ? <div>Question: {result.qs}</div> : <p></p>}</td>
+                                    <td> {result.t === "QCM" ? <div>Bonne Reponse: {result.q}</div> : <p></p>}</td>
+                                    <td>{(result.a !== result.q) && (result.t === "Normal") ? <div></div> : <div>La réponse: {result.a}</div>}</td>
+                                    <td>{result.a !== result.q  ? 
+                                    <div>{result.t === "Normal" ? <div></div>: <div>Incorrect</div> }</div> 
+                                    : <div>Correct</div>}</td>
+                                </tr> :(<div></div>)) }
+                                    
+                                }
                                 )}
                         </tbody>
                     </table>
@@ -254,9 +257,9 @@ class resultats extends Component {
                                 <tr>
                                     <th>Template</th>
                                     <th>Nom</th>
-                                    <th>Prenom</th>
+                                    <th>Prénom</th>
                                     <th>Email</th>
-                                    <th>Resultat</th>
+                                    <th>Résultat</th>
                                     <th>Actions</th>
 
                                 </tr>

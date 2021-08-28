@@ -56,8 +56,8 @@ export class AddCategorie extends React.Component {
                             <div className="container">
                                 <div className="gf-field-wrapper gf-field-string gf-field-telephone "   >
                                     <label>
-                                        <span>Categorie</span>
-                                        <input type="text" name="libelle" className="form-control" placeholder="Libelle"
+                                        <span>Catégorie</span>
+                                        <input type="text" name="libelle" className="form-control" placeholder="Catégorie"
                                             value={this.state.libelle}
                                             onChange={((data) => { this.setState({ libelle: data.target.value }) })}
                                         />

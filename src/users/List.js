@@ -68,7 +68,7 @@ class List extends Component {
                         return user;
                     }
                 }).map(user => {
-                    return user.role === "RH" ? (
+                    return (
                         <tr key={user.id}>
                             <td>{user.role}</td>
                             <td>{user.nom}</td>
@@ -77,16 +77,18 @@ class List extends Component {
                             <td>{user.telephone}</td>
                             <td>{user.age}</td>
                             <td>
-                                <div className="">
+                                {user.role === "RH" ? <div className="">
                                     <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
                                     <a title="Update" target="_blank" href={"/UpdateHR/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
-                                </div>
+                                </div> : 
+                                <div className="">
+                                <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
+                                <a title="Update" target="_blank" href={"/UpdateCondidat/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
+                                <a className="fas fa-share" style={{ color: "black" }} href={"/SendQuiz/" + user.email + "/" + user.prenom}></a>
+                            </div>}
                             </td>
                         </tr>
-                    ) : (
-                        <div>
-                        </div>
-                    )
+                    ) 
                 }
                 )
                 this.setState({
@@ -146,7 +148,7 @@ class List extends Component {
                                 <tr>
                                     <th>Rôle</th>
                                     <th>Nom</th>
-                                    <th>Prenom</th>
+                                    <th>Prénom </th>
                                     <th>Email</th>
                                     <th>Telephone</th>
                                     <th>Age</th>

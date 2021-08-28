@@ -12,14 +12,12 @@ function Templates() {
     const [hasError, setErrors] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(5);
+    const [questions, setQuestions] = useState([])
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = templates.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
-
 
     useEffect(() => {
         fetch("http://localhost:3000/templates")
@@ -48,37 +46,36 @@ function Templates() {
             body: JSON.stringify(item)
         };
         Swal.fire({
-            title: 'Es-tu sûr?',
+            title: 'Vous êtes sûr?',
             text: 'Vous ne pouvez pas récupérer ça!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Oui, supprimez-le!',
             cancelButtonText: 'Non, garde-le'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 fetch("http://localhost:3000/templates/" + id + "/" + item._id, requestOptions);
-              Swal.fire(
-                'Supprimé!',
-                'Suppression Effectuer.',
-                'success'
-              )
+                Swal.fire(
+                    'Supprimé!',
+                    'Suppression Effectuer.',
+                    'success'
+                )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire(
-                'Annulé',
-                'Suppression Annuler',
-                'error'
-              )
+                Swal.fire(
+                    'Annulé',
+                    'Suppression Annuler',
+                    'error'
+                )
             }
-          })
+        })
     }
 
     return (
-
         <div className="others " >
             <section className="contact-section pt-130">
                 <div className="container">
                     <div className="topleft">
-                    <div className="col-md-12">
+                        <div className="col-md-12">
                             <div className="section-title text-center animate__animated animate__fadeInDown">
                                 <p>Templates </p>
                             </div>
@@ -89,7 +86,7 @@ function Templates() {
             <section className="contact-section pt-130">
                 <div className="gf-field-wrapper gf-field-select gf-field-object  column" >
                     <label>
-                        <span>Categories</span>
+                        <span>Catégories</span>
                         <select name="categorie" className="" id="dropdown" onChange={handleSelectChange}
                         >
                             <option value="All">All</option>
@@ -126,7 +123,7 @@ function Templates() {
                                         </a>
                                         <div className="job-short-desription">
                                             <a href="">
-                                                Categorie  :
+                                            Catégorie  :
                                             </a>
                                             <span>{p.categorie === null || p.categorie === undefined || p.categorie === "" ? <div></div> : p.categorie.libelle}</span>
                                         </div>
@@ -150,6 +147,8 @@ function Templates() {
                                                 {p.question.map((s, i) => (
                                                     <tbody>
                                                         <tr key={s._id}>
+                                                        
+
                                                             <td>{s.libelle}</td>
                                                             <td><a onClick={() => { updatepull(s, p._id) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a></td>
                                                         </tr>

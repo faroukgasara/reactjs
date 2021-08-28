@@ -31,7 +31,7 @@ class Categorie extends Component {
 
     submitHandler(id) {
         Swal.fire({
-            title: 'Es-tu sûr?',
+            title: 'Vous êtes sûr?',
             text: 'Vous ne pouvez pas récupérer ça!',
             icon: 'warning',
             showCancelButton: true,
@@ -178,7 +178,7 @@ class Categorie extends Component {
                         <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                             <thead>
                                 <tr>
-                                    <th>Libelle</th>
+                                    <th>Catégories</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

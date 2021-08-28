@@ -2,6 +2,7 @@ import { ListAlt } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import SkillBar from 'react-skillbars';
+import Swal from 'sweetalert2';
 import { formatTime } from './Timer';
 
 const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) => {
@@ -51,7 +52,15 @@ const End = ({ results, data, onReset, onAnswersCheck, time, id, email, tem }) =
       },
       body: JSON.stringify(allValues)
     })
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Modification Effectuée',
+      showConfirmButton: false,
+      timer: 1500
+  }).then(setTimeout(() => { window.close(); }, 1600))
   }
+  console.log(results)
 
   useEffect(() => {
     let correct = 0;

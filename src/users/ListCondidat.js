@@ -150,7 +150,7 @@ class ListCondidat extends Component {
                                 <tr>
                                     <th>Rôle</th>
                                     <th>Nom</th>
-                                    <th>Prenom</th>
+                                    <th>Prénom</th>
                                     <th>Email</th>
                                     <th>Telephone</th>
                                     <th>Age</th>

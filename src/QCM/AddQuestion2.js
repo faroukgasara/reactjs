@@ -113,7 +113,7 @@ export class AddQuestion2 extends React.Component {
                         <br></br>
                         <div className="col-auto gf-field-wrapper gf-field-select gf-field-object " >
                             <label>
-                                <span>Categorie</span>
+                                <span>Catégories</span>
                                 <select name="categorie" className="" id="dropdown"
                                     value={this.state.categorie}
                                     onChange={((data) => { this.setState({ categorie: data.target.value }) })}

@@ -19,6 +19,7 @@ const QuizManager = (props) => {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
+    fetchUser()
     fetchData()
     if (step === 3) {
       clearInterval(interval);
@@ -43,20 +44,29 @@ const QuizManager = (props) => {
   }
   const [templates, setTemplate] = useState([]);
 
+  const [user, setUser] = useState([]);
 
-  async function fetchData() {
-    const res = await fetch("http://localhost:3000/templates/"+props.match.params.id);
-    res
-      .json()
-      .then(res => setTemplate(res));
+
+  function fetchData() {
+    fetch("http://localhost:3000/templates/" + props.match.params.id)
+      .then((data) => data.json())
+      .then(data => setTemplate(data));
+  }
+
+  function fetchUser() {
+    fetch("http://localhost:3000/users/" + props.match.params.email)
+      .then((data) => data.json())
+      .then(data => setUser(data));
   }
 
   return (
     <div className="others">
-      {step === 1 && <Start 
-        onQuizStart={quizStartHandler} 
+      {step === 1 && <Start
+        onQuizStart={quizStartHandler}
         tem={templates.libelle}
-        
+        users={user}
+        id={templates._id}
+
       />}
       {step === 2 && <Steps
         data={templates.question[activeQuestion]}

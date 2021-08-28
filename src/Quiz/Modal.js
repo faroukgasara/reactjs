@@ -43,7 +43,8 @@ const Modal = ({ handleClose, show, results }) => {
                                 <div key={i} className="col-md-12">
                                     <div className="col-auto">
                                         <p>{i+1} : Type : {result.t}</p>
-                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <div>Question: {result.q}</div> : <p>Bonne réponse: {result.q}</p> }</p>
+                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <div>Question: {result.q}</div> : <p>Question: {result.qs}</p> }</p>
+                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <p></p> : <p>Bonne réponse: {result.q}</p> }</p>
                                     </div>         
                                     <div className="col-auto">
                                         <p className={(result.a === result.q) ? 'greenresult' : 'redresult'}>{(result.a !== result.q) && (result.t === "Normal") ? <div>La réponse: {result.a}</div> : <div>La réponse: {result.a}</div> }</p>
