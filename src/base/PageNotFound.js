@@ -1,6 +1,6 @@
 import React from 'react';
 
-import sadface from './sadface.png';
+import sadface from './sad-face.png';
 const PageNotFound = () => {
     return (
         <div className="container" style={{ marginLeft: "180px" }}>

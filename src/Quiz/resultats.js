@@ -55,7 +55,9 @@ class resultats extends Component {
 
         doc.autoTable({ startY: 0.3 * doc.internal.pageSize.height, rowPageBreak: 'avoid',html: '#table' })
         let finalY = doc.previousAutoTable.finalY;
-        doc.autoTable({ startY: finalY+20, rowPageBreak: 'avoid',html: '#table1'})
+        doc.autoTable({ startY: finalY+20, rowPageBreak: 'avoid',html: '#table1',
+        styles: { fillColor: "#86c5da" },
+    })
 
         doc.autoPrint();
         doc.save('table.pdf')
