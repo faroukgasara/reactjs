@@ -24,7 +24,7 @@ class List extends Component {
 
     submitHandler(email) {
         Swal.fire({
-            title: 'Es-tu sûr?',
+            title: 'Vous êtes sûr?',
             text: 'Vous ne pouvez pas récupérer ça!',
             icon: 'warning',
             showCancelButton: true,
@@ -32,7 +32,7 @@ class List extends Component {
             cancelButtonText: 'Non, garde-le'
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch("http://localhost:3000/users/" + email, {
+                fetch(global.api+"/users/" + email, {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
@@ -42,13 +42,13 @@ class List extends Component {
             })
               Swal.fire(
                 'Supprimé!',
-                'Suppression Effectuer.',
+                'Suppression Effectuée.',
                 'success'
               )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               Swal.fire(
                 'Annulé',
-                'Suppression Annuler',
+                'Suppression Annulée',
                 'error'
               )
             }
@@ -57,19 +57,19 @@ class List extends Component {
 
     receivedData() {
         axios
-            .get(`http://localhost:3000/users`)
+            .get(global.api+`/users`)
             .then(res => {
                 const data = res.data;
                 const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
                 const postData = slice.filter((user) => {
                     if (this.state.search === "") {
                         return user;
-                    } else if (user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
+                    } else if (user.role.toLowerCase().includes(this.state.search.toLowerCase()) || user.prenom.toLowerCase().includes(this.state.search.toLowerCase()) || user.nom.toLowerCase().includes(this.state.search.toLowerCase()) || user.email.toLowerCase().includes(this.state.search.toLowerCase())) {
                         return user;
                     }
                 }).map(user => {
                     return (
-                        <tr key={user.id}>
+                        <tr key={user._id}>
                             <td>{user.role}</td>
                             <td>{user.nom}</td>
                             <td>{user.prenom}</td>
@@ -77,13 +77,13 @@ class List extends Component {
                             <td>{user.telephone}</td>
                             <td>{user.age}</td>
                             <td>
-                                {user.role === "RH" ? <div className="">
-                                    <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
-                                    <a title="Update" target="_blank" href={"/UpdateHR/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
+                                {user.role === "RH" ? <div >
+                                    <a onClick={() => { this.submitHandler(user.email) }} title="Delete" ><i className="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
+                                    <a title="Update"  href={"/UpdateHR/" + user.email}><i className="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
                                 </div> : 
                                 <div className="">
-                                <a onClick={() => { this.submitHandler(user.email) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
-                                <a title="Update" target="_blank" href={"/UpdateCondidat/" + user.email}><i class="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
+                                <a onClick={() => { this.submitHandler(user.email) }} title="Delete" ><i className="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
+                                <a title="Update"  href={"/UpdateCondidat/" + user.email}><i className="fas fa-pencil-alt"><i style={{ color: "white" }} >z</i></i></a>
                                 <a className="fas fa-share" style={{ color: "black" }} href={"/SendQuiz/" + user.email + "/" + user.prenom}></a>
                             </div>}
                             </td>
@@ -111,7 +111,6 @@ class List extends Component {
 
     componentDidUpdate() {
         this.receivedData()
-        
     }
 
     componentDidMount() {
@@ -124,9 +123,9 @@ class List extends Component {
                 <section className="contact-section pt-130">
                     <div className="container">
                         <div className="topleft">
-                            <div class="col-md-12 ">
-                                <div class="section-title text-center animate__animated animate__fadeInDown" >
-                                    <p>List des RH</p>
+                            <div className="col-md-12 ">
+                                <div className="section-title text-center animate__animated animate__fadeInDown" >
+                                    <p>List des utilisateurs</p>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +135,7 @@ class List extends Component {
                     <div className="col-auto  gf-field-string gf-field-fonction  "   >
                         <label>
                             <span>Recherche : </span><br></br>
-                            <input class="add" type="text" name="search" placeholder="Recherche"
+                            <input className="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />

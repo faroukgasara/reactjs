@@ -1,7 +1,8 @@
 import React from "react";
 import Swal from "sweetalert2";
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 export class AddQuestion2 extends React.Component {
+
     constructor() {
         super()
         this.state = {
@@ -14,21 +15,17 @@ export class AddQuestion2 extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.setState({ isLoading: true })
-        const response = await fetch('http://localhost:3000/categories')
-        if (response.ok) {
-            const categories = await response.json()
-            this.setState({ categories, isLoading: false })
-        } else {
-            this.setState({ isError: true, isLoading: false })
-        }
+        fetch(global.api+"/categories")
+        .then((categories) => categories.json())
+        .then((categories) => this.setState({ categories, isLoading: false }));
     }
 
     renderTableRows = () => {
         return this.state.categories.map(cat => {
             return (
-                <option value={cat.libelle}>
+                <option key={cat.libelle} value={cat.libelle}>
                     {cat.libelle}
                 </option>
             )
@@ -56,7 +53,7 @@ export class AddQuestion2 extends React.Component {
                 text: 'Choisir un Duree!',
             })
         } else {
-            fetch("http://localhost:3000/questions", {
+            fetch(global.api + "/questions", {
                 method: 'post',
                 mode: 'cors',
                 headers: {
@@ -71,7 +68,7 @@ export class AddQuestion2 extends React.Component {
                 title: 'Votre travail a été enregistré',
                 showConfirmButton: false,
                 timer: 1500
-            }).then(setTimeout(() => { window.location.reload(); }, 1500))
+            }).then(setTimeout(() => { history.push("/Question"); }, 1500))
         }
     }
 
@@ -104,7 +101,6 @@ export class AddQuestion2 extends React.Component {
                             <label>
                                 <span>Durée : </span>
                                 <input className="form-control" type="number" name="duree" placeholder="Durée"
-
                                     value={this.state.duree}
                                     onChange={((data) => { this.setState({ duree: data.target.value }) })}
                                 />
@@ -116,8 +112,7 @@ export class AddQuestion2 extends React.Component {
                                 <span>Catégories</span>
                                 <select name="categorie" className="" id="dropdown"
                                     value={this.state.categorie}
-                                    onChange={((data) => { this.setState({ categorie: data.target.value }) })}
-                                >
+                                    onChange={((data) => { this.setState({ categorie: data.target.value }) })}>
                                     <option>Select</option>
                                     {this.renderTableRows()}
                                 </select>

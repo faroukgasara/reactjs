@@ -3,7 +3,7 @@ import "../App.css";
 
 const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-    const [updatecat,setUpdateCat] = useState({libelle: ""})
+    const [updatecat, setUpdateCat] = useState({ libelle: "" })
 
     function update() {
         const requestOptions = {
@@ -11,14 +11,13 @@ const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatecat)
         };
-        fetch("http://localhost:3000/categories/" + data, requestOptions)
+        fetch(global.api+"/categories/" + data, requestOptions)
             .then(handleClose());
-            
     }
 
     const changeHandler = e => {
         setUpdateCat({ ...updatecat, [e.target.name]: e.target.value })
-      }
+    }
 
     return (
         <div className={showHideClassName}>
@@ -26,7 +25,7 @@ const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
                 <div className="modalContainer">
                     <div className="titleCloseBtn">
                         <button type="button" onClick={handleClose}>
-                        <i class="fas fa-times"></i>
+                            <i className="fas fa-times"></i>
                         </button>
                     </div>
                     <div className="title">
@@ -39,8 +38,8 @@ const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
                                 <span><strong>Categorie</strong></span>
                                 <br></br>
                                 <input type="text" name="libelle" className="form-control"
-                                onChange={changeHandler}
-                                placeholder={nom}
+                                    onChange={changeHandler}
+                                    placeholder={nom}
                                 />
                             </label>
                             <br></br>
@@ -55,5 +54,4 @@ const UpdateCategorieModal = ({ handleClose, show, data, nom }) => {
         </div>
     );
 };
-
 export default UpdateCategorieModal;

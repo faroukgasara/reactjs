@@ -1,4 +1,3 @@
-
 import { Redirect, Route } from "react-router-dom";
 
 function ProtectedRoutes({ isAuth: isAuth, component: Component, ...rest }) {
@@ -11,7 +10,7 @@ function ProtectedRoutes({ isAuth: isAuth, component: Component, ...rest }) {
                 } else {
                     return (
                         <Redirect
-                            to={{ pathname: "/List", State: { from: props.location } }}
+                            to={{ pathname: "/", State: { from: props.location } }}
                         />
                     )
                 }

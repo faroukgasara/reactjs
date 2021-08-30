@@ -2,40 +2,30 @@ import "./sidebar.css";
 import SignUp from '../users/SignUp';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import List from '../users/List';
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categorie from '../QCM/Categorie';
 import AddCategorie from '../QCM/AddCategorie';
 import AddQuestion from '../QCM/AddQuestion';
-import UpdateQuestion from '../QCM/UpdateQuestion';
 import AddTemplate from '../QCM/AddTemplate';
 import Question from '../QCM/Question';
-import DragAndDrop from '../QCM/DragAndDrop';
 import TemplateManager from '../QCM/TemplateManager';
-import ListCondidat from '../users/ListCondidat';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { ChakraProvider } from "@chakra-ui/react";
 import Templates from '../QCM/Templates';
-import {
-  Timeline,
-  TrendingUp,
-  ListAlt,
-  AddBox,
-  PortableWifiOffOutlined,
-  Face,
-  Person,
-} from "@material-ui/icons";
+import {ListAlt, AddBox } from "@material-ui/icons";
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 import SendQUIZ from "../Quiz/SendQuiz";
 import resultats from "../Quiz/resultats";
 import UpdateCondidat from "../users/UpdateCondidat";
 import UpdateHR from "../users/UpdateHR";
-import { Avatar } from "@material-ui/core";
-import Profile from "./Profile";
+import LandingPage from "./LandingPage";
 
 function Sidebar() {
+
   const token = localStorage.getItem("token");
   const [isAuth, SetIsAuth] = useState(true);
+  
 
   const submitHandler = () => {
     if (token && token !== "" && token !== undefined) {
@@ -68,52 +58,48 @@ function Sidebar() {
                       </li>
                       <li className="sidebarListItem">
                         <AddBox className="sidebarIcon" />
-                        <Link className="" to="/SignUp">Ajouter des utilisateurs</Link>
+                        <Link to="/SignUp">Ajouter des utilisateurs</Link>
                       </li>
                       <li className="sidebarListItem">
                         <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/List">List des RH</Link>
+                        <Link to="/List">List des utilisateurs</Link>
                       </li>
                       <li className="sidebarListItem">
                         <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/ListCondidat">List des Candidats</Link>
-                      </li>
-                      <li className="sidebarListItem">
-                        <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/reultats">Reultats</Link>
+                        <Link to="/reultats">Reultats</Link>
                       </li>
                       <li className="sidebarListItem1">
                         Templates
                       </li>
                       <li className="sidebarListItem">
                         <AddBox className="sidebarIcon" />
-                        <Link className="" to="/AddTemplate">Ajouter Template</Link>
+                        <Link to="/AddTemplate">Ajouter Template</Link>
                       </li>
                       <li className="sidebarListItem">
                         <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/Templates">List des Templates</Link>
+                        <Link to="/Templates">List des Templates</Link>
                       </li>
                       <li className="sidebarListItem1">
                         Categories
                       </li>
                       <li className="sidebarListItem">
                         <AddBox className="sidebarIcon" />
-                        <Link className="" to="/AddCategorie">Ajouter Categorie</Link>
+                        <Link to="/AddCategorie">Ajouter Categorie</Link>
                       </li>
                       <li className="sidebarListItem">
                         <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/Categorie">List des Categories</Link>
+                        <Link to="/Categorie">List des Categories</Link>
                       </li>
                       <li className="sidebarListItem1">
                         Questions
                       </li>
                       <li className="sidebarListItem">
                         <AddBox className="sidebarIcon" />
-                        <Link className="" to="/AddQuestion">Ajouter Question</Link>
+                        <Link to="/AddQuestion">Ajouter Question</Link>
                       </li>
                       <li className="sidebarListItem">
                         <ListAlt className="sidebarIcon" />
-                        <Link className="" to="/Question">List des Questions</Link>
+                        <Link to="/Question">List des Questions</Link>
                       </li>
                     </ul>
                   </div>
@@ -122,21 +108,18 @@ function Sidebar() {
               <Switch>
                 <ProtectedRoutes path="/SignUp" component={SignUp} isAuth={isAuth} />
                 <ProtectedRoutes path="/List" component={List} isAuth={isAuth} />
-                <ProtectedRoutes path="/ListCondidat" component={ListCondidat} isAuth={isAuth} />
                 <ProtectedRoutes path="/Categorie" component={Categorie} isAuth={isAuth} />
                 <ProtectedRoutes path="/AddCategorie" component={AddCategorie} isAuth={isAuth} />
                 <ProtectedRoutes path="/AddQuestion" component={AddQuestion} isAuth={isAuth} />
                 <ProtectedRoutes path="/Question" component={Question} isAuth={isAuth} />
-                <Route path="/UpdateQuestion/:id" component={UpdateQuestion} isAuth={isAuth} />
-                <Route path="/SendQuiz/:id/:prenom" component={SendQUIZ} isAuth={isAuth} />
+                <ProtectedRoutes path="/Templates" component={Templates} isAuth={isAuth} />
+                <ProtectedRoutes path="/reultats" component={resultats} isAuth={isAuth} />
                 <ProtectedRoutes path="/AddTemplate" component={AddTemplate} isAuth={isAuth} />
-                <Route path="/DragAndDrop/:id" component={DragAndDrop} />
                 <Route path="/TemplateManager/:id" component={TemplateManager} />
                 <Route path="/UpdateCondidat/:id" component={UpdateCondidat} />
                 <Route path="/UpdateHR/:id" component={UpdateHR} />
-                <ProtectedRoutes path="/Templates" component={Templates} isAuth={isAuth} />
-                <ProtectedRoutes path="/Profile" component={Profile} isAuth={isAuth} />
-                <ProtectedRoutes path="/reultats" component={resultats} isAuth={isAuth} />
+                <Route path="/SendQuiz/:id/:prenom" component={SendQUIZ} isAuth={isAuth} />
+                <Route path="*" component={LandingPage} />
               </Switch>
             </Router>
           </div>

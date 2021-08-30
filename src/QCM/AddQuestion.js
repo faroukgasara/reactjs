@@ -3,7 +3,6 @@ import AddQuestion2 from "./AddQuestion2";
 import AddQuestionQCM from "./AddQuestionQCM";
 
 function AddQuestion() {
-
     const [role, setRole] = useState("Normal")
     return (
         <div className="others ">
@@ -15,7 +14,7 @@ function AddQuestion() {
                                 <div className="gf-field-wrapper gf-field-select gf-field-object " >
                                     <label>
                                         <span>Type</span>
-                                        <select name="user" className="" id="dropdown" onChange={(e) => {
+                                        <select name="user" id="dropdown" onChange={(e) => {
                                             const selecredRole = e.target.value;
                                             setRole(selecredRole)
                                         }} >

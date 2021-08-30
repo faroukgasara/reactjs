@@ -17,7 +17,7 @@ function SignUp() {
                                     <label>
                                         <span>Rôle
                                         </span>
-                                        <select name="user" className="" id="dropdown" onChange={(e) => {
+                                        <select name="user" Name="class" id="dropdown" onChange={(e) => {
                                             const selecredRole = e.target.value;
                                             setRole(selecredRole)
                                         }} >

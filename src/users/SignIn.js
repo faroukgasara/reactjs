@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 import Sidebar from "../base/Sidebar";
 
@@ -12,7 +11,7 @@ const token = localStorage.getItem("token")
 export const SignIn = () => {
     const [email, setEmail] = useState("");
     const [mdp, setmdp] = useState("");
-    const history = useHistory();
+    const history = require("history").createBrowserHistory({ forceRefresh: true });
 
     const submitHandler = () => {
         if (mdp === "") {
@@ -29,7 +28,7 @@ export const SignIn = () => {
                 text: 'Entrez un mail valide!',
             })
         } else {
-            fetch("http://localhost:3000/login", {
+            fetch(global.api + "/login", {
                 method: 'post',
                 mode: 'cors',
                 headers: {
@@ -52,44 +51,42 @@ export const SignIn = () => {
                 localStorage.setItem("token", data.access_token)
             }).catch(error => {
                 console.error(error)
-            }).then(() => { history.push("/List"); window.location.reload(); })
+            }).then(() => { history.push("/List"); })
         }
     }
 
     return (
-        <div className="" >
-            <div className="gf-form-fields-wrapper"  >
-                <div>{
-                    (token && token !== "" && token !== undefined) ? <Sidebar /> :
-                        <div className="login">
-                            <div className="loginContainer1"  >
-                                <img className="tourne" src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" />
-                            </div>
-                            <div className="loginContainer">
-                                <div className="user-box"   >
-                                    <label>Email </label>
-                                    <input type="email" name="email" className="form-control" required="" placeholder="Enter email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                                <div className="user-box"  >
-                                    <label> Mot de passe</label>
-                                    <input type="password" name="mdp" className="form-control" placeholder="Enter password"
-                                        value={mdp}
-                                        onChange={(e) => setmdp(e.target.value)}
-                                    />
-                                </div>
-                                <br></br>
-                                <br></br>
-                                <button onClick={submitHandler} className="btn btn-white btn-lg btn-block">
-                                    Se connecter
-                                </button>
-                            </div>
+        <div>{
+            (token && token !== "" && token !== undefined) ? <Sidebar /> :
+                <div className="login">
+                    <div className="loginContainer1"  >
+                        <img className="tourne" src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" />
+                    </div>
+                    <div className="loginContainer">
+                        <div className="user-box"   >
+                            <label>Email </label>
+                            <input type="email" name="email" className="form-control"  placeholder="Enter email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
-                }</div>
-            </div>
-        </div>
+                        <div className="user-box"  >
+                            <label> Mot de passe</label>
+                            <input type="password" name="mdp" className="form-control" placeholder="Enter password"
+                                value={mdp}
+                                onChange={(e) => setmdp(e.target.value)}
+                            />
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <button onClick={submitHandler} className="btn btn-white btn-lg btn-block">
+                            Se connecter
+                        </button>
+                    </div>
+                </div>
+        }</div>
+
+
     );
 }
 export default SignIn;

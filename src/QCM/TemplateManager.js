@@ -1,55 +1,44 @@
-import { Container, Flex, Heading, List, Stack } from "@chakra-ui/react";
 import { useState } from "react";
-import { useDrop } from "react-dnd";
-import InsertQuestion from "./InsertQuestion";
 import '../App.css';
-
 import React, { useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Swal from "sweetalert2";
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 function TemplateManager(props) {
 
-    
+    const [questions, setQuestions] = useState([]);
+    const [hasError, setErrors] = useState(false);
+    const [addquestions, setAddquestions] = useState([]);
+    let i = addquestions.map((id) => id._id);
+
     const columns = [
-        { field: '_id', headerName: 'id' ,hide: true},
+        { field: '_id', headerName: 'id', hide: true },
         { field: 'libelle', headerName: 'Libelle', width: 951 },
         { field: 'categorie', headerName: 'categorie', width: 145 },
         { field: 'duree', headerName: 'duree', width: 123 },
     ]
 
-
-    const [questions, setQuestions] = useState([]);
-    const [hasError, setErrors] = useState(false);
-    const [addquestions, setAddquestions] = useState([]);
-    const [abc, setAbc] = useState([]);
-
     useEffect(() => {
-        fetch("http://localhost:3000/templates/"+props.match.params.id)
+        fetch(global.api + "/templates/" + props.match.params.id)
             .then((data) => data.json())
             .then((data) => setAddquestions(data.question))
             .catch(err => setErrors(err));
-         
-    },[]);
-    let i = addquestions.map((id) =>id._id);
-    
+    }, []);
+
     useEffect(() => {
-        fetch("http://localhost:3000/questions")
+        fetch(global.api + "/questions")
             .then((data) => data.json())
             .then((data) => setQuestions(data))
             .catch(err => setErrors(err));
     }, []);
-    
 
-
-    async function updatepush(e)  {
+    async function updatepush(e) {
         e.preventDefault()
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(i)
+            headers: { 'Content-Type': 'application/json' }
         };
-        fetch("http://localhost:3000/templates/" + props.match.params.id, {
+        fetch(global.api + "/templates/" + props.match.params.id, {
             method: 'put',
             mode: 'cors',
             headers: {
@@ -57,22 +46,22 @@ function TemplateManager(props) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                question:i
+                question: i
             })
         })
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Votre travail a été enregistré',
-                showConfirmButton: false,
-                timer: 1500
-            })
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Votre travail a été enregistré',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => { history.push("/Templates"); })
     }
 
-    function ab(itm){
+    function save(itm) {
         i = itm
     }
-    
+
     return (
         <div className="others">
             <section className="contact-section pt-130">
@@ -86,7 +75,6 @@ function TemplateManager(props) {
                     </div>
                 </div>
             </section>
-            
             <section className="contact-section pt-130">
                 <form onSubmit={updatepush}>
                     <div className="top" >
@@ -99,7 +87,7 @@ function TemplateManager(props) {
                             enableCellSelect={true}
                             checkboxSelection
                             selectionModel={i}
-                            onSelectionModelChange={itm => ab(itm)}
+                            onSelectionModelChange={itm => save(itm)}
                         />
                     </div>
                 </form>
@@ -107,5 +95,4 @@ function TemplateManager(props) {
         </div>
     );
 }
-
 export default TemplateManager;

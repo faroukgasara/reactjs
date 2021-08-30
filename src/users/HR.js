@@ -1,6 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2";
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -22,7 +22,7 @@ export class HR extends React.Component {
         }
     }
 
-    async submitHandler() {
+    submitHandler() {
         if (this.state.nom === "") {
             Swal.fire({
                 icon: 'error',
@@ -63,7 +63,7 @@ export class HR extends React.Component {
             })
         } else {
             let data = this.state;
-            fetch("http://localhost:3000/users", {
+            fetch(global.api + "/users", {
                 method: 'post',
                 mode: 'cors',
                 headers: {
@@ -71,7 +71,7 @@ export class HR extends React.Component {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(data)
-            }).then(async response => {
+            }).then(response => {
                 if (!response.ok) {
                     Swal.fire({
                         icon: 'error',
@@ -85,7 +85,7 @@ export class HR extends React.Component {
                         title: 'Votre travail a été enregistré',
                         showConfirmButton: false,
                         timer: 1500
-                    }).then(setTimeout(() => { window.location.reload(); }, 1500))
+                    }).then(setTimeout(() => { history.push("/List"); }, 1500))
                 }
             });
         }
@@ -97,7 +97,7 @@ export class HR extends React.Component {
                 <div className="gf-field-wrapper gf-field-string gf-field-fonction  "  >
                     <label>
                         <span>Nom  </span>
-                        <input type="text" name="nom" required="" className="form-control" placeholder="Nom"
+                        <input type="text" name="nom"  className="form-control" placeholder="Nom"
                             value={this.state.nom}
                             onChange={((data) => { this.setState({ nom: data.target.value }) })}
                         />
@@ -137,7 +137,7 @@ export class HR extends React.Component {
                 <div className="gf-field-wrapper gf-field-email gf-field-email  required "   >
                     <label>
                         <span>Email</span>
-                        <input type="email" name="email" className="form-control" required="" placeholder="Email"
+                        <input type="email" name="email" className="form-control"  placeholder="Email"
                             value={this.state.email}
                             onChange={((data) => { this.setState({ email: data.target.value }) })}
                         />

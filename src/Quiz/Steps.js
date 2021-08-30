@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './test.css'
 import '../index';
 import '../base/sidebar.css'
-import {  ListAlt } from '@material-ui/icons';
+import { ListAlt } from '@material-ui/icons';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import SkillBar from 'react-skillbars';
 const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetActiveQuestion, onSetStep, time, tem }) => {
@@ -12,16 +12,15 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
     const radiosWrapper = useRef();
     const [counter, setCounter] = useState(data.duree);
     const [rep, setRep] = useState("");
-    
+
 
     const skills = [
-        { level:Math.round((activeQuestion+1)/numberOfQuestions*100 ) },
+        { level: Math.round((activeQuestion + 1) / numberOfQuestions * 100) },
     ];
     const colors = {
         bar: '#85bb25',
         title: {
             text: 'white',
-
             background: '#85bb25'
         }
     }
@@ -31,7 +30,7 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
         if (findCheckedInput) {
             findCheckedInput.checked = false;
         }
-        localStorage.setItem("hello", "hello")
+        localStorage.setItem("check", "check")
     }, [data]);
 
     const changeHandler = (e) => {
@@ -44,21 +43,19 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
         setCounter(data.duree)
     });
 
-
     const nextClickHandler = () => {
         setCounter(0)
-
-       let qs = data.libelle ;
+        let qs = data.libelle;
         data.reponse.map((choice, i) => {
             if (choice.type === "QCM") {
 
                 if (choice.vf != "") {
-                    onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: selected, t: "QCM" ,qs:qs}]);
+                    onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: selected, t: "QCM", qs: qs }]);
                 }
             }
             if (choice.type === "Normal") {
                 setSelected('zef');
-                onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: rep, t: "Normal",qs:qs }]);
+                onAnswerUpdate(prevState => [...prevState, { q: choice.libellerep, a: rep, t: "Normal", qs: qs }]);
             }
         })
 
@@ -85,22 +82,18 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                             <div className='col-md-10  titlequiz1'>{data.libelle}</div>
                         </div>
                     </div>
-
                     <div className="item4" style={{ backgroundColor: "#4c5353", textAlign: "center" }}><a className="navbar-brand logo logo-header anim-logo" >
                         <img style={{ marginTop: 25 }} src="https://piximind.com/themes/pkurg-spacebootstrap5/assets/img/svg/logo.svg" alt="Piximind" className="logo-green" />
                     </a></div>
-
                     <div className='item2 ' style={{ backgroundColor: "whitesmoke" }}>
                         <div className="container" style={{ marginTop: 10 }}>
 
                             <p style={{ width: 105, marginTop: 45, marginBottom: 30 }}  >
                                 {tem}
                             </p>
-
                             <p style={{ width: 30, fontSize: 15 }}  >
                                 Temp
                             </p>
-
                             <CountdownCircleTimer
                                 isPlaying
                                 key={counter}
@@ -126,23 +119,19 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                                     {activeQuestion + 1}<span className="titlequiz">/{numberOfQuestions}</span>
                                 </div>
                             </div>
-
                             <SkillBar skills={skills}
                                 height={10}
                                 colors={colors}
                             />
-
                         </div>
                     </div>
                     <div className='item3' style={{ backgroundColor: "white" }}>
                         <div className="container" ref={radiosWrapper}>
-                        
-
                             {data.reponse.map((choice, i) => {
                                 {
                                     if (choice.type === 'QCM') {
                                         return < label className="option" key={i} >
-                                            <input  type="radio" name="answer" value={choice.libellerep} onChange={changeHandler} />
+                                            <input type="radio" name="answer" value={choice.libellerep} onChange={changeHandler} />
                                             {choice.libellerep}
                                         </label>
                                     } else {
@@ -151,7 +140,7 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
 
                                                 <span className='ab'>Reponse :</span>
 
-                                                <input name="rep" className="form-control" required=""
+                                                <input name="rep" className="form-control" 
                                                     value={rep}
                                                     onChange={(e) => { setRep(e.target.value); setSelected("sdf") }}
                                                 />
@@ -164,7 +153,6 @@ const Steps = ({ data, onAnswerUpdate, numberOfQuestions, activeQuestion, onSetA
                         </div>
                         <button className="quizbutton1" onClick={nextClickHandler}>Suivant</button>
                         {error && <div className="wrong">{error}</div>}
-                       
                     </div>
                 </div>
             </div>

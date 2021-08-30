@@ -12,28 +12,25 @@ function Templates() {
     const [hasError, setErrors] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(5);
-    const [questions, setQuestions] = useState([])
-
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = templates.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
+    const [selectedItem, setSelectedItem] = useState("All");
 
     useEffect(() => {
-        fetch("http://localhost:3000/templates")
+        fetch(global.api+"/templates")
             .then((data) => data.json())
             .then((data) => setTemplate(data))
             .catch(err => setErrors(err));
     });
 
     useEffect(() => {
-        fetch("http://localhost:3000/categories")
+        fetch(global.api+"/categories")
             .then((data) => data.json())
             .then((data) => setCategorie(data))
             .catch(err => setErrors(err));
     }, []);
-
-    const [selectedItem, setSelectedItem] = useState("All");
 
     function handleSelectChange(event) {
         setSelectedItem(event.target.value);
@@ -54,16 +51,16 @@ function Templates() {
             cancelButtonText: 'Non, garde-le'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch("http://localhost:3000/templates/" + id + "/" + item._id, requestOptions);
+                fetch(global.api+"/templates/" + id + "/" + item._id, requestOptions);
                 Swal.fire(
                     'Supprimé!',
-                    'Suppression Effectuer.',
+                    'Suppression Effectuée.',
                     'success'
                 )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Annulé',
-                    'Suppression Annuler',
+                    'Suppression Annulée',
                     'error'
                 )
             }
@@ -87,13 +84,13 @@ function Templates() {
                 <div className="gf-field-wrapper gf-field-select gf-field-object  column" >
                     <label>
                         <span>Catégories</span>
-                        <select name="categorie" className="" id="dropdown" onChange={handleSelectChange}
+                        <select name="categorie"  id="dropdown" onChange={handleSelectChange}
                         >
                             <option value="All">All</option>
                             {categories.map(categorie => (
 
                                 <option
-                                    key={categorie.libelle}
+                                    key={categorie._id}
                                     value={categorie.libelle}
                                 >
                                     {categorie.libelle}
@@ -113,31 +110,30 @@ function Templates() {
                                     if (template.categorie.libelle.toLowerCase().includes(selectedItem.toLowerCase())) {
                                         return template;
                                     }
-
                                 }
                             }).map((p, i) => {
                                 return p.categorie !== null && p.categorie !== undefined && p.categorie !== "" ?
-                                    <li className="job-details">
-                                        <a className="job-title" href="">
+                                    <li className="job-details" key={p._id}>
+                                        <a className="job-title" >
                                             Titre  : {p.libelle}
                                         </a>
                                         <div className="job-short-desription">
-                                            <a href="">
-                                            Catégorie  :
+                                            <a >
+                                                Catégorie  :
                                             </a>
                                             <span>{p.categorie === null || p.categorie === undefined || p.categorie === "" ? <div></div> : p.categorie.libelle}</span>
                                         </div>
                                         <ShowMoreText
                                             lines={1}
-                                            more={<i class="fas fa-chevron-circle-down"></i>}
-                                            less={<i class="fas fa-chevron-circle-up"></i>}
+                                            more={<i className="fas fa-chevron-circle-down"></i>}
+                                            less={<i className="fas fa-chevron-circle-up"></i>}
                                             className='content-css'
                                             anchorClass='my-anchor-css-class'
                                             expanded={false}
                                             width={280}
                                         >
                                             <div>List des Questions</div><br></br>
-                                            <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
+                                            <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                                                 <thead>
                                                     <tr>
                                                         <th>Questions</th>
@@ -145,12 +141,10 @@ function Templates() {
                                                     </tr>
                                                 </thead>
                                                 {p.question.map((s, i) => (
-                                                    <tbody>
-                                                        <tr key={s._id}>
-                                                        
-
+                                                    <tbody key={s._id}>
+                                                        <tr>
                                                             <td>{s.libelle}</td>
-                                                            <td><a onClick={() => { updatepull(s, p._id) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a></td>
+                                                            <td><a onClick={() => { updatepull(s, p._id) }} title="Delete"><i className="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a></td>
                                                         </tr>
                                                     </tbody>
                                                 ))}
@@ -162,7 +156,7 @@ function Templates() {
                                         </a>
                                         <i style={{ color: "white" }} >z</i>
                                         <a onClick={() => {
-                                            fetch("http://localhost:3000/templates/" + p._id, {
+                                            fetch(global.api+"/templates/" + p._id, {
                                                 method: 'DELETE',
                                                 mode: 'cors',
                                                 headers: {
@@ -170,7 +164,12 @@ function Templates() {
                                                     'Accept': 'application/json'
                                                 },
                                             })
-                                        }} className="btn btn-primary btn-white" href="">
+                                            Swal.fire(
+                                                'Supprimé!',
+                                                'Suppression Effectuée.',
+                                                'success'
+                                            )
+                                        }} className="btn btn-primary btn-white" >
                                             Supprimer
                                         </a>
 

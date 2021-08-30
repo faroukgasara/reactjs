@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import SkillBar from 'react-skillbars';
-import { ListAlt } from '@material-ui/icons';
+import { ListAlt, Warning } from '@material-ui/icons';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import Swal from 'sweetalert2';
 import PageNotFound from '../base/PageNotFound';
 
 const Start = ({ onQuizStart, tem, users, id }) => {
@@ -19,7 +18,7 @@ const Start = ({ onQuizStart, tem, users, id }) => {
   }
   const [tek, settek] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/resultats/" + id + "/" + users._id)
+    fetch(global.api+"/resultats/" + id + "/" + users._id)
       .then((data) => data.json())
       .then((data) => settek(data));
   });
@@ -80,14 +79,14 @@ const Start = ({ onQuizStart, tem, users, id }) => {
 
             </div>
             <div className="item3" style={{ backgroundColor: "white" }}>
-
               {
-                (localStorage.getItem("hello") && localStorage.getItem("hello") !== "" && localStorage.getItem("hello") !== undefined) ? <div></div> : <div><div style={{ backgroundColor: "whitesmoke", marginLeft: 30, marginRight: 30, textAlign: "left", marginTop: 30 }}>
+                (localStorage.getItem("check") && localStorage.getItem("check") !== "" && localStorage.getItem("check") !== undefined) ? <div></div> : <div><div style={{ backgroundColor: "whitesmoke", marginLeft: 30, marginRight: 30, textAlign: "left", marginTop: 30 }}>
                   <p style={{ fontSize: 25 }}>Trucs et astuces </p>
                   <p style={{ fontSize: 15 }}>
                     Tu peux utiliser le button suivant pour naviguer parmi les questions<br></br>
                     Vous ne pouvez pas revenir aux questions précédentes si vous les sautez<br></br>
-                    Chaque question à un temps précis
+                    Chaque question à un temps précis<br></br>
+                    <i class="fas fa-exclamation-triangle"  style={{ color: "red",fontSize:"20px",marginRight:"5px" }}></i>Si vous commencez le questionnaire, ne fermez ou rafraîchissez pas la page
                   </p>
                 </div>
                   <button className="quizbutton" onClick={onQuizStart}>Commencer</button></div>}

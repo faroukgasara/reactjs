@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import axios from 'axios';
+import React from "react";
 import Swal from "sweetalert2";
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 export class AddTemplate extends React.Component {
 
     constructor() {
@@ -14,14 +13,13 @@ export class AddTemplate extends React.Component {
     }
 
     async submitHandler(e) {
-        if (this.state.libelle == "") {
+        if (this.state.libelle === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un Titre valide!',
             })
-        } else if (this.state.categorie == "") {
-
+        } else if (this.state.categorie === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -29,11 +27,10 @@ export class AddTemplate extends React.Component {
             })
         } else {
             let data = this.state;
-            fetch("http://localhost:3000/templates", {
+            fetch(global.api+"/templates", {
                 method: 'post',
                 mode: 'cors',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
@@ -45,26 +42,21 @@ export class AddTemplate extends React.Component {
                 title: 'Votre travail a été enregistré',
                 showConfirmButton: false,
                 timer: 1500
-            })
-            this.setState({libelle:""})
+            }).then(() => { history.push("/Templates"); })
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.setState({ isLoading: true })
-        const response = await fetch('http://localhost:3000/categories')
-        if (response.ok) {
-            const categories = await response.json()
-            this.setState({ categories, isLoading: false })
-        } else {
-            this.setState({ isError: true, isLoading: false })
-        }
+        fetch(global.api+"/categories")
+        .then((categories) => categories.json())
+        .then((categories) => this.setState({ categories, isLoading: false }));
     }
 
     renderTableRows = () => {
         return this.state.categories.map(cat => {
             return (
-                <option value={cat._id}>
+                <option key ={cat._id} value={cat._id}>
                     {cat.libelle}
                 </option>
             )
@@ -93,10 +85,10 @@ export class AddTemplate extends React.Component {
                                     <div className="gf-field-wrapper gf-field-select gf-field-object " >
                                         <label>
                                             <span>Catégories</span>
-                                            <select name="categorie" className="" id="dropdown"
+                                            <select name="categorie" id="dropdown"
                                                 value={this.state.categorie}
                                                 onChange={((data) => { this.setState({ categorie: data.target.value }) })}>
-                                                    <option>Select</option>
+                                                <option>Select</option>
                                                 {this.renderTableRows()}
                                             </select>
                                         </label>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
-
 import Steps from './Steps';
 import Start from './Start';
 import End from './End';
-import Templates from '../QCM/Templates';
-import Modal from './Modal';
 
 
 
@@ -18,9 +15,20 @@ const QuizManager = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [time, setTime] = useState(0);
 
+
   useEffect(() => {
-    fetchUser()
-    fetchData()
+    fetch(global.api+"/templates/" + props.match.params.id)
+      .then((data) => data.json())
+      .then(data => setTemplate(data));
+  }, []);
+
+  useEffect(() => {
+    fetch(global.api+"/users/" + props.match.params.email)
+      .then((data) => data.json())
+      .then(data => setUser(data));
+  }, []);
+
+  useEffect(() => {
     if (step === 3) {
       clearInterval(interval);
     }
@@ -46,18 +54,6 @@ const QuizManager = (props) => {
 
   const [user, setUser] = useState([]);
 
-
-  function fetchData() {
-    fetch("http://localhost:3000/templates/" + props.match.params.id)
-      .then((data) => data.json())
-      .then(data => setTemplate(data));
-  }
-
-  function fetchUser() {
-    fetch("http://localhost:3000/users/" + props.match.params.email)
-      .then((data) => data.json())
-      .then(data => setUser(data));
-  }
 
   return (
     <div className="others">

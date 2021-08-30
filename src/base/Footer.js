@@ -11,9 +11,9 @@ export class Footer extends Component {
                         </div>
                         <div className="col-md-6 text-right">
                             <div className="wrap-footer-social">
-                                <a href="https://www.facebook.com/piximind/?ref=pages_you_manage" title="Pixi Facebook" target="_blank"><i className="fab fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/company/piximind/mycompany/?viewAsMember=true" title="Pixi Linked-in" target="_blank"><i className="fab fa-linkedin-in"></i></a>
-                                <a href="https://www.instagram.com/piximind_officiel/" title="Pixi Instagram" target="_blank"><i className="fab fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/piximind/?ref=pages_you_manage" title="Pixi Facebook" ><i className="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/company/piximind/mycompany/?viewAsMember=true" title="Pixi Linked-in" ><i className="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.instagram.com/piximind_officiel/" title="Pixi Instagram" ><i className="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>

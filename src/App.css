@@ -115,11 +115,14 @@
   flex-direction: column;
   justify-content: center;
   box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+  border-radius: 15px 0px 0px 15px;
 }
 
 
 
 .login .loginContainer {
+  
+  border-radius: 0px 15px 15px 0px;
   position: relative;
   left: 30%;
   padding: 50px;

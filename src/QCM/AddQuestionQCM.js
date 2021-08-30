@@ -1,8 +1,9 @@
 import React from "react";
 import Swal from "sweetalert2";
-
-import '../App.css'
+import '../App.css';
+const history = require("history").createBrowserHistory({forceRefresh:true});
 class AddQuestionQCM extends React.Component {
+
   constructor() {
     super()
     this.state = {
@@ -15,21 +16,17 @@ class AddQuestionQCM extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({ isLoading: true })
-    const response = await fetch('http://localhost:3000/categories')
-    if (response.ok) {
-      const categories = await response.json()
-      this.setState({ categories, isLoading: false })
-    } else {
-      this.setState({ isError: true, isLoading: false })
-    }
-  }
+    fetch(global.api+"/categories")
+    .then((categories) => categories.json())
+    .then((categories) => this.setState({ categories, isLoading: false }));
+}
 
   renderTableRows = () => {
     return this.state.categories.map(cat => {
       return (
-        <option value={cat.libelle}>
+        <option key={cat.libelle} value={cat.libelle}>
           {cat.libelle}
         </option>
       )
@@ -76,7 +73,7 @@ class AddQuestionQCM extends React.Component {
         text: 'Choisir un Categorie valide!',
       })
     } else {
-      fetch("http://localhost:3000/questions", {
+      fetch(global.api+"/questions", {
         method: 'post',
         mode: 'cors',
         headers: {
@@ -91,7 +88,7 @@ class AddQuestionQCM extends React.Component {
         title: 'Votre travail a été enregistré',
         showConfirmButton: false,
         timer: 1500
-      }).then(setTimeout(() => { window.location.reload(); }, 1500))
+      }).then(setTimeout(() => {  history.push("/Question"); }, 1500))
     }
   }
 
@@ -136,7 +133,7 @@ class AddQuestionQCM extends React.Component {
         <div className="col-auto gf-field-wrapper gf-field-string gf-field-fonction" >
           <label>
             <span>Durée : </span>
-            <input class="form-control" type="number" name="duree" placeholder="Durée"
+            <input className="form-control" type="number" name="duree" placeholder="Durée"
 
               value={this.state.duree}
               onChange={((data) => { this.setState({ duree: data.target.value }) })}
@@ -147,7 +144,7 @@ class AddQuestionQCM extends React.Component {
         <div className="col-auto gf-field-wrapper gf-field-string gf-field-object" >
           <label>
             <span>Catégories</span>
-            <select name="categorie" className="" id="dropdown"
+            <select name="categorie" id="dropdown"
               value={this.state.categorie}
               onChange={((data) => { this.setState({ categorie: data.target.value }) })}
             >

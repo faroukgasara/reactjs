@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from '@material-ui/data-grid';
-import emailjs, { send } from 'emailjs-com';
+import emailjs from 'emailjs-com';
 import Swal from "sweetalert2";
 const SendQUIZ = (props) => {
 
@@ -13,18 +13,17 @@ const SendQUIZ = (props) => {
     const [hasError, setErrors] = useState(false);
     const [categories, setCategorie] = useState([]);
     const [selectedItem, setSelectedItem] = useState("All");
-    const [quizid, setQuizId] = useState([])
     const [it, setIt] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:3000/templates")
+        fetch(global.api+"/templates")
             .then((data) => data.json())
             .then((data) => setTemplate(data))
             .catch(err => setErrors(err));
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:3000/categories")
+        fetch(global.api+"/categories")
             .then((data) => data.json())
             .then((data) => setCategorie(data))
             .catch(err => setErrors(err));
@@ -33,12 +32,6 @@ const SendQUIZ = (props) => {
     function handleSelectChange(event) {
         setSelectedItem(event.target.value);
     }
-
-
-
-
-
-
 
     function gererleslien(itm) {
         let items = [...itm];
@@ -50,12 +43,11 @@ const SendQUIZ = (props) => {
         }
     }
 
-
     async function sendEmail(e) {
         e.preventDefault()
 
         Swal.fire({
-            title: 'Es-tu sûr?',
+            title: 'Vous êtes sûr?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Oui, Envoyer!',
@@ -69,25 +61,19 @@ const SendQUIZ = (props) => {
                         console.log(error.text);
                     });
                 Swal.fire(
-                    'Envoyer!',
-                    'Envoyer Effectuer.',
+                    'Envoyé!',
+                    "Envoyé.",
                     'success'
                 )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Annulé',
-                    'Envoyer Annuler',
+                    "Annuler l'envoi",
                     'error'
                 )
             }
         })
-
-
-
-
     }
-
-
 
     return (
         <div className="others ">
@@ -96,7 +82,7 @@ const SendQUIZ = (props) => {
                     <div className="topleft">
                         <div className="col-md-12">
                             <div className="section-title text-center animate__animated animate__fadeInDown">
-                                <p>Envoyer Quiz </p>
+                                <p>Tester Mes Candidats </p>
                             </div>
                         </div>
                     </div>
@@ -109,7 +95,7 @@ const SendQUIZ = (props) => {
                             <div className="gf-field-wrapper gf-field-select gf-field-object col-auto" >
                                 <label>
                                     <span>Categories</span>
-                                    <select name="categorie" className="" id="dropdown" onChange={handleSelectChange}
+                                    <select name="categorie"  id="dropdown" onChange={handleSelectChange}
                                     >
                                         <option value="All">All</option>
                                         {categories.map(categorie => (
@@ -127,7 +113,7 @@ const SendQUIZ = (props) => {
                             </div>
                             <div className="col-auto gf-field-string gf-field-fonction  " >
                                 <label>
-                                    <input class="form-control" type="hidden" name="message" value={it}
+                                    <input className="form-control" type="hidden" name="message" value={it}
 
                                     />
                                 </label>
@@ -137,13 +123,13 @@ const SendQUIZ = (props) => {
                             </div>
                             <div className="col-auto gf-field-string gf-field-fonction  " >
                                 <label>
-                                    <input class="form-control" type="hidden" name="email" value={props.match.params.id}
+                                    <input className="form-control" type="hidden" name="email" value={props.match.params.id}
                                     />
-                                    <input class="form-control" type="hidden" name="to_name" value={props.match.params.prenom}
+                                    <input className="form-control" type="hidden" name="to_name" value={props.match.params.prenom}
                                     />
-                                    <input class="form-control" type="hidden" name="from_name" value="PIXIMIND"
+                                    <input className="form-control" type="hidden" name="from_name" value="PIXIMIND"
                                     />
-                                    <input class="form-control" type="hidden" name="subject" value="Quiz"
+                                    <input className="form-control" type="hidden" name="subject" value="Quiz"
                                     />
                                 </label>
                             </div>

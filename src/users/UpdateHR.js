@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Swal from "sweetalert2";
 
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -24,7 +24,7 @@ export class UpdateHR extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/users/" + this.props.match.params.id)
+        fetch(global.api+"/users/" + this.props.match.params.id)
             .then((data) => data.json())
             .then((data) => this.setState({ user: data }))
     }
@@ -72,7 +72,7 @@ export class UpdateHR extends Component {
             })
         } else {
             let data = this.state;
-            fetch("http://localhost:3000/users/" + this.state.user._id, {
+            fetch(global.api+"/users/" + this.state.user._id, {
                 method: 'put',
                 mode: 'cors',
                 headers: {
@@ -95,7 +95,7 @@ export class UpdateHR extends Component {
                         title: 'Modification Effectuée',
                         showConfirmButton: false,
                         timer: 1500
-                    }).then(setTimeout(() => { window.close(); }, 1600))
+                    }).then(setTimeout(() => {  history.push("/List");}, 1500))
                 }
             });
             

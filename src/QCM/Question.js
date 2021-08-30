@@ -6,6 +6,7 @@ import QuestionsModal from "./QuestionsModal";
 import Swal from "sweetalert2";
 
 class List extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -39,7 +40,7 @@ class List extends Component {
 
     receivedData() {
         axios
-            .get(`http://localhost:3000/questions`)
+            .get(global.api+`/questions`)
             .then(res => {
                 const data = res.data;
                 const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
@@ -55,13 +56,13 @@ class List extends Component {
                         <td>{ques.categorie}</td>
                         <td>{ques.duree}</td>
                         <td>
-                            {ques.reponse[0].type === "QCM" ? <div className="">
-                                <a onClick={() => { this.handlemodal(ques.reponse) }} title="Modal" target="_blank"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                            {ques.reponse[0].type === "QCM" ? <div >
+                                <a onClick={() => { this.handlemodal(ques.reponse) }} title="Modal"><i className="fas fa-eye" aria-hidden="true"></i></a>
                             </div> : (<div></div>)}
                         </td>
                         <td>
-                            <div className="">
-                                <a onClick={() => { this.submitHandler(ques._id) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <div >
+                                <a onClick={() => { this.submitHandler(ques._id) }} title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -104,29 +105,29 @@ class List extends Component {
             showCancelButton: true,
             confirmButtonText: 'Oui, supprimez-le!',
             cancelButtonText: 'Non, garde-le'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                fetch("http://localhost:3000/questions/" + id, {
-                method: 'DELETE',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-            })
-              Swal.fire(
-                'Supprimé!',
-                'Suppression Effectuer.',
-                'success'
-              )
+                fetch(global.api+"/questions/" + id, {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                Swal.fire(
+                    'Supprimé!',
+                    'Suppression Effectuée.',
+                    'success'
+                )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire(
-                'Annulé',
-                'Suppression Annuler',
-                'error'
-              )
+                Swal.fire(
+                    'Annulé',
+                    'Suppression Annulée',
+                    'error'
+                )
             }
-          })
+        })
     }
 
     render() {
@@ -138,7 +139,7 @@ class List extends Component {
                     <div className="container">
                         <div className="topleft">
                             <div className="col-md-12">
-                            <div className="section-title text-center animate__animated animate__fadeInDown">
+                                <div className="section-title text-center animate__animated animate__fadeInDown">
                                     <p>List des Questions</p>
                                 </div>
                             </div>
@@ -149,14 +150,14 @@ class List extends Component {
                     <div className="col-auto gf-field-string gf-field-fonction  "   >
                         <label>
                             <span>Recherche : </span><br></br>
-                            <input class="add" type="text" name="search" placeholder="Recherche"
+                            <input className="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />
                         </label>
                     </div>
                     <div className="container">
-                        <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
+                        <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                             <thead>
                                 <tr>
                                     <th>Questions</th>

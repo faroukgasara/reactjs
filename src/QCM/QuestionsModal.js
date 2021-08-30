@@ -11,9 +11,9 @@ const QuestionsModal = ({ handleClose, show, results }) => {
                 <tr key={res._id}>
                     <td>{res.libellerep}</td>
                     <td>
-                        {res.vf === 'True' ? <div className="" >
-                        <i class="fas fa-check"></i>
-                        </div> : <i class="fas fa-times"></i>}
+                        {res.vf === 'True' ? <div  >
+                            <i className="fas fa-check"></i>
+                        </div> : <i className="fas fa-times"></i>}
                     </td>
                     <td>{res.type}</td>
                 </tr>
@@ -27,7 +27,7 @@ const QuestionsModal = ({ handleClose, show, results }) => {
                 <div className="modalContainer2">
                     <div className="titleCloseBtn">
                         <button type="button" onClick={handleClose}>
-                            <i class="fas fa-times"></i>
+                            <i className="fas fa-times"></i>
                         </button>
                     </div>
                     <br></br>
@@ -35,7 +35,7 @@ const QuestionsModal = ({ handleClose, show, results }) => {
                         <strong>Réponses !</strong>
                     </div>
                     <div className="container">
-                        <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
+                        <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                             <thead>
                                 <tr>
                                     <th>Reponse</th>

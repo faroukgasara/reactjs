@@ -3,7 +3,6 @@ import "../App.css";
 
 const Modal = ({ handleClose, show, results }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
     useEffect(() => {
@@ -34,23 +33,20 @@ const Modal = ({ handleClose, show, results }) => {
                         <p > {correctAnswers }<strong >/{results.length}</strong></p>
                     </div>
                     <br></br>
-
-
                     <div className="scroller">
                         {!results ? <div> Error</div> :
                             results.map((result, i) => 
                             (
-                                <div key={i} className="col-md-12">
-                                    <div className="col-auto">
+                                <p key={i} className="col-md-12">
+                                    <p className="col-auto">
                                         <p>{i+1} : Type : {result.t}</p>
-                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <div>Question: {result.q}</div> : <p>Question: {result.qs}</p> }</p>
+                                        <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <p>Question: {result.q}</p> : <p>Question: {result.qs}</p> }</p>
                                         <p className={result.a === result.q  ? 'blueresult' : 'blueresult'}> { result.t === "Normal" ? <p></p> : <p>Bonne réponse: {result.q}</p> }</p>
-                                    </div>         
-                                    <div className="col-auto">
-                                        <p className={(result.a === result.q) ? 'greenresult' : 'redresult'}>{(result.a !== result.q) && (result.t === "Normal") ? <div>La réponse: {result.a}</div> : <div>La réponse: {result.a}</div> }</p>
-                                            
-                                    </div>
-                                </div>
+                                    </p>         
+                                    <p className="col-auto">
+                                        <p className={(result.a === result.q) ? 'greenresult' : 'redresult'}>{(result.a !== result.q) && (result.t === "Normal") ? <p>La réponse: {result.a}</p> : <p>La réponse: {result.a}</p> }</p>   
+                                    </p>
+                                </p>
                             )
                             )}
                     </div>
@@ -59,5 +55,4 @@ const Modal = ({ handleClose, show, results }) => {
         </div>
     );
 };
-
 export default Modal;

@@ -1,11 +1,12 @@
-
 import React, { Component } from "react";
 import '../App.css';
 import Swal from "sweetalert2";
 import UpdateCategorieModal from "./UpdateCategorieModal";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
+
 class Categorie extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -37,29 +38,29 @@ class Categorie extends Component {
             showCancelButton: true,
             confirmButtonText: 'Oui, supprimez-le!',
             cancelButtonText: 'Non, garde-le'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                fetch("http://localhost:3000/categories/" + id, {
-                method: 'DELETE',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-            })
-              Swal.fire(
-                'Supprimé!',
-                'Suppression Effectuer.',
-                'success'
-              )
+                fetch(global.api+"/categories/" + id, {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                Swal.fire(
+                    'Supprimé!',
+                    'Suppression Effectuée.',
+                    'success'
+                )
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire(
-                'Annulé',
-                'Suppression Annuler',
-                'error'
-              )
+                Swal.fire(
+                    'Annulé',
+                    'Suppression Annulée',
+                    'error'
+                )
             }
-          })
+        })
     }
 
     async update(id) {
@@ -69,7 +70,7 @@ class Categorie extends Component {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.state)
             };
-            fetch("http://localhost:3000/categories/" + id, requestOptions)
+            fetch(global.api+"/categories/" + id, requestOptions)
                 .then(response => response.json());
         } else {
             Swal.fire({
@@ -98,7 +99,7 @@ class Categorie extends Component {
 
     receivedData() {
         axios
-            .get(`http://localhost:3000/categories`)
+            .get(global.api+`/categories`)
             .then(res => {
                 const data = res.data;
                 const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
@@ -112,9 +113,9 @@ class Categorie extends Component {
                     <tr key={categorie._id}>
                         <td>{categorie.libelle}</td>
                         <td>
-                            <div className="">
-                                <a onClick={() => { this.submitHandler(categorie._id) }} title="Delete" target="_blank"><i class="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
-                                <a onClick={() => { this.handleAddSecondInput(categorie._id, categorie.libelle) }} title="Update" target="_blank"><i class="fas fa-pencil-alt"></i></a>
+                            <div>
+                                <a onClick={() => { this.submitHandler(categorie._id) }} title="Delete" ><i className="fa fa-trash" aria-hidden="true"><i style={{ color: "white" }} >z</i></i></a>
+                                <a onClick={() => { this.handleAddSecondInput(categorie._id, categorie.libelle) }} title="Update" ><i className="fas fa-pencil-alt"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -153,19 +154,18 @@ class Categorie extends Component {
                     <div className="container">
                         <div className="topleft">
                             <div className="col-md-12">
-                            <div className="section-title text-center animate__animated animate__fadeInDown">
+                                <div className="section-title text-center animate__animated animate__fadeInDown">
                                     <p>List des Categories</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
                 <section className="contact-section pt-130">
                     <div className="col-auto gf-field-string gf-field-fonction  "   >
                         <label>
                             <span>Recherche : </span><br></br>
-                            <input class="add" type="text" name="search" placeholder="Recherche"
+                            <input className="add" type="text" name="search" placeholder="Recherche"
                                 value={this.state.search}
                                 onChange={((data) => { this.setState({ search: data.target.value }) })}
                             />
@@ -175,7 +175,7 @@ class Categorie extends Component {
                         <p>Modal</p>
                     </UpdateCategorieModal>
                     <div className="container">
-                        <table class="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
+                        <table className="col-md-11 offset-md-1 text-center aos-init aos-animate" className="content-table">
                             <thead>
                                 <tr>
                                     <th>Catégories</th>

@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Swal from "sweetalert2";
-
+const history = require("history").createBrowserHistory({ forceRefresh: true });
 export class AddCategorie extends React.Component {
+
     constructor() {
         super();
         this.state = {
@@ -9,24 +10,23 @@ export class AddCategorie extends React.Component {
         }
     }
 
-    async submitHandler() {
-        if (this.state.libelle == "") {
+     submitHandler() {
+        if (this.state.libelle === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Entrez un categorie valide!',
             })
         } else {
-            let data = this.state;
-            fetch("http://localhost:3000/categories", {
+            fetch(global.api+"/categories", {
                 method: 'post',
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(data)
-            }).then(async response => {
+                body: JSON.stringify(this.state)
+            }).then( response => {
                 if (!response.ok) {
                     Swal.fire({
                         icon: 'error',
@@ -40,8 +40,7 @@ export class AddCategorie extends React.Component {
                         title: 'Votre travail a été enregistré',
                         showConfirmButton: false,
                         timer: 1500
-                    })
-                    this.setState({ libelle: "" })
+                    }).then(() => { history.push("/Categorie"); })
                 }
             })
         }
